@@ -15,5 +15,6 @@ namespace Uc_13_Caua_Website.Data
         }
 
         public DbSet<Uc_13_Caua_Website.Models.Fornecedor> Fornecedor { get; set; } = default!;
+        public DbSet<Uc_13_Caua_Website.Models.Cliente> Cliente { get; set; } = default!;
     }
 }

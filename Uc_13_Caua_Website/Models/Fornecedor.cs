@@ -29,6 +29,10 @@ namespace Uc_13_Caua_Website.Models
         [StringLength(200, ErrorMessage = "O endereço completo não pode exceder 200 caracteres.")]
         public string? EnderecoCompleto { get; set; }
 
+        [Required(ErrorMessage = "O CEP é obrigatório")]
+        [RegularExpression(@"^\d{5}\-\d{3}", ErrorMessage = "CEP inválido")]
+        public string? CEP { get; set; }
+
         [Required(ErrorMessage = "O nome da Cidade é obrigatório.")]
         [StringLength(100, ErrorMessage = "O nome da cidade não pode exceder 100 caracteres.")]
         public string? Cidade { get; set; }

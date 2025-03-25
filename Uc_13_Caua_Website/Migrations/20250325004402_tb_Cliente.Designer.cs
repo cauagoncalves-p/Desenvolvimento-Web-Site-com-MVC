@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Uc_13_Caua_Website.Data;
 
@@ -10,9 +11,11 @@ using Uc_13_Caua_Website.Data;
 namespace Uc_13_Caua_Website.Migrations
 {
     [DbContext(typeof(Uc_13_Caua_WebsiteContext))]
-    partial class Uc_13_Caua_WebsiteContextModelSnapshot : ModelSnapshot
+    [Migration("20250325004402_tb_Cliente")]
+    partial class tb_Cliente
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,7 +36,7 @@ namespace Uc_13_Caua_Website.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CPF")
+                    b.Property<string>("CNPJ")
                         .IsRequired()
                         .HasMaxLength(18)
                         .HasColumnType("nvarchar(18)");
@@ -84,7 +87,7 @@ namespace Uc_13_Caua_Website.Migrations
 
                     b.HasKey("ClienteId");
 
-                    b.ToTable("Cliente", (string)null);
+                    b.ToTable("Cliente");
                 });
 
             modelBuilder.Entity("Uc_13_Caua_Website.Models.Fornecedor", b =>
@@ -145,7 +148,7 @@ namespace Uc_13_Caua_Website.Migrations
 
                     b.HasKey("FornecedorId");
 
-                    b.ToTable("Fornecedor", (string)null);
+                    b.ToTable("Fornecedor");
                 });
 #pragma warning restore 612, 618
         }
