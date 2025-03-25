@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Uc_13_Caua_Website.Models;
+using Uc_13_Caua_WebSite.Models;
 
-namespace Uc_13_Caua_Website.Controllers;
+namespace Uc_13_Caua_WebSite.Controllers;
 
 public class HomeController : Controller
 {

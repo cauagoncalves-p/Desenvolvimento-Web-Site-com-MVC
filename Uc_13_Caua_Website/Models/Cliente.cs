@@ -1,7 +1,6 @@
-﻿using Microsoft.DotNet.Scaffolding.Shared.Messaging;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Uc_13_Caua_Website.Models
+namespace Uc_13_Caua_WebSite.Models
 {
     public class Cliente
     {
@@ -14,9 +13,9 @@ namespace Uc_13_Caua_Website.Models
 
         [Required(ErrorMessage = "Sobrenome é obrigatório")]
         [StringLength(100)]
-        public string? Sobrenome { get; set;}
+        public string? Sobrenome { get; set; }
 
-        [Required(ErrorMessage = "Nome é obrigatório")]
+        [Required(ErrorMessage = "Email é obrigatório")]
         [EmailAddress(ErrorMessage = "Por favor, insira um email válido.")]
         public string? Email { get; set; }
 
@@ -27,15 +26,15 @@ namespace Uc_13_Caua_Website.Models
 
         [Required(ErrorMessage = "O CPF é obrigatório.")]
         [StringLength(18)]
-        [RegularExpression(@"^\d{3}\.\d{3}\.\d{3}/-\d{2}$", ErrorMessage = "CPF inválido.")]
-        public string? CPF { get; set; }
+        [RegularExpression(@"^\d{3}\.\d{3}\.\d{3}-\d{2}$", ErrorMessage = "CPF inválido.")]
+        public string? CPF { get; set;}
 
         [Required(ErrorMessage = "O Endereço Completo é obrigatório.")]
         [StringLength(200, ErrorMessage = "O endereço completo não pode exceder 200 caracteres.")]
         public string? EnderecoCompleto { get; set; }
 
         [Required(ErrorMessage = "O CEP é obrigatório")]
-        [RegularExpression(@"^\d{5}\-\d{3}$", ErrorMessage = "CEP inválido")]
+        [RegularExpression(@"^\d{5}-\d{3}$", ErrorMessage = "CEP inválido")]  
         public string? CEP { get; set; }
 
         [Required(ErrorMessage = "O nome da Cidade é obrigatório.")]
@@ -52,6 +51,6 @@ namespace Uc_13_Caua_Website.Models
 
         [Required(ErrorMessage = "O nome do País é obrigatório.")]
         [StringLength(100, ErrorMessage = "O nome do país não pode exceder 100 caracteres.")]
-        public string? País { get; set; }
+        public string? País { get; set; }  
     }
 }

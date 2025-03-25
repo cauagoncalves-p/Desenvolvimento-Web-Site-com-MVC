@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Uc_13_Caua_Website.Models.Cliente>
+﻿@model IEnumerable<Uc_13_Caua_WebSite.Models.Cliente>
 
 @{
     ViewData["Title"] = "Index";
@@ -12,9 +12,6 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ClienteId)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
@@ -32,7 +29,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.EnderecoCompleto)
-            </th> 
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.CEP)
             </th>
@@ -55,9 +52,6 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ClienteId)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
             <td>
@@ -74,7 +68,7 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EnderecoCompleto)
-            </td> 
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CEP)
             </td>

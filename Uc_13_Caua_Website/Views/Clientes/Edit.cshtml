@@ -1,4 +1,4 @@
-﻿@model Uc_13_Caua_Website.Models.Cliente
+﻿@model Uc_13_Caua_WebSite.Models.Cliente
 
 @{
     ViewData["Title"] = "Edit";
@@ -30,7 +30,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Celular" class="control-label"></label>
-                <input asp-for="Celular" class="form-control" placeholder="(11) 12345-6789" />
+                <input asp-for="Celular" class="form-control" />
                 <span asp-validation-for="Celular" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -42,7 +42,7 @@
                 <label asp-for="EnderecoCompleto" class="control-label"></label>
                 <input asp-for="EnderecoCompleto" class="form-control" />
                 <span asp-validation-for="EnderecoCompleto" class="text-danger"></span>
-            </div> 
+            </div>
             <div class="form-group">
                 <label asp-for="CEP" class="control-label"></label>
                 <input asp-for="CEP" class="form-control" />

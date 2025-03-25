@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Uc_13_Caua_Website.Data;
-using Uc_13_Caua_Website.Models;
+using Uc_13_Caua_WebSite.Data;
+using Uc_13_Caua_WebSite.Models;
 
-namespace Uc_13_Caua_Website.Controllers
+namespace Uc_13_Caua_WebSite.Controllers
 {
     public class ClientesController : Controller
     {
-        private readonly Uc_13_Caua_WebsiteContext _context;
+        private readonly Uc_13_Caua_WebSiteContext _context;
 
-        public ClientesController(Uc_13_Caua_WebsiteContext context)
+        public ClientesController(Uc_13_Caua_WebSiteContext context)
         {
             _context = context;
         }
@@ -54,7 +54,7 @@ namespace Uc_13_Caua_Website.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClienteId,Nome,Sobrenome,Email,Celular,CPF,EnderecoCompleto,Cidade,Estado,UF,País")] Cliente cliente)
+        public async Task<IActionResult> Create([Bind("ClienteId,Nome,Sobrenome,Email,Celular,CPF,EnderecoCompleto,CEP,Cidade,Estado,UF,País")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace Uc_13_Caua_Website.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ClienteId,Nome,Sobrenome,Email,Celular,CPF,EnderecoCompleto,Cidade,Estado,UF,País")] Cliente cliente)
+        public async Task<IActionResult> Edit(int id, [Bind("ClienteId,Nome,Sobrenome,Email,Celular,CPF,EnderecoCompleto,CEP,Cidade,Estado,UF,País")] Cliente cliente)
         {
             if (id != cliente.ClienteId)
             {

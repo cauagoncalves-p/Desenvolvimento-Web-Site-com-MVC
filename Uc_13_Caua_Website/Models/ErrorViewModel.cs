@@ -1,9 +1,8 @@
-namespace Uc_13_Caua_Website.Models
-{
-    public class ErrorViewModel
-    {
-        public string? RequestId { get; set; }
+namespace Uc_13_Caua_WebSite.Models;
 
-        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
-    }
+public class ErrorViewModel
+{
+    public string? RequestId { get; set; }
+
+    public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 }
