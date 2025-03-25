@@ -13,33 +13,60 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ProdutoId" />
+
             <div class="form-group">
                 <label asp-for="ProdutoNome" class="control-label"></label>
-                <input asp-for="ProdutoNome" class="form-control" />
+                <input asp-for="ProdutoNome" class="form-control" placeholder="Ex: Notebook Dell i7" />
                 <span asp-validation-for="ProdutoNome" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Tipo" class="control-label"></label>
-                <input asp-for="Tipo" class="form-control" />
+                <select asp-for="Tipo" class="form-control" asp-items="ViewBag.TiposProduto">
+                    <option value="">Selecione o tipo...</option>
+                </select>
                 <span asp-validation-for="Tipo" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="PrecoUnitario" class="control-label"></label>
-                <input asp-for="PrecoUnitario" class="form-control" />
+                <input asp-for="PrecoUnitario" class="form-control" id="precoUnitario"
+                       placeholder="R$ 99,99" step="0.01" />
                 <span asp-validation-for="PrecoUnitario" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Quantidade" class="control-label"></label>
-                <input asp-for="Quantidade" class="form-control" />
+                <input asp-for="Quantidade" class="form-control" id="quantidade"
+                       placeholder="Ex: 3" min="1" />
                 <span asp-validation-for="Quantidade" class="text-danger"></span>
             </div>
+
+            <!-- Campo de exibição do Preço Total (somente leitura) -->
+            <div class="form-group">
+                <label class="control-label">Preço Total</label>
+                <input type="text" class="form-control" id="precoTotal"
+                       value="@(Model.PrecoUnitario * Model.Quantidade)" readonly />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DataCadastro" class="control-label"></label>
+                <input asp-for="DataCadastro" class="form-control"/>
+                <span asp-validation-for="DataCadastro" class="text-danger"></span>
+            </div>
+
+
             <div class="form-group">
                 <label asp-for="FornecedorId" class="control-label"></label>
-                <select asp-for="FornecedorId" class="form-control" asp-items="ViewBag.FornecedorId"></select>
+                <select asp-for="FornecedorId" class="form-control" asp-items="ViewBag.FornecedorId">
+                    <option value="">Selecione um fornecedor...</option>
+                </select>
                 <span asp-validation-for="FornecedorId" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary ml-2">Cancelar</a>
             </div>
         </form>
     </div>
@@ -50,5 +77,22 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        // Cálculo automático do preço total
+        $(document).ready(function() {
+            function calcularTotal() {
+                const preco = parseFloat($('#precoUnitario').val()) || 0;
+                const qtd = parseInt($('#quantidade').val()) || 0;
+                const total = (preco * qtd).toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                });
+                $('#precoTotal').val(total);
+            }
+
+            // Calcular ao carregar e quando os campos mudam
+            calcularTotal();
+            $('#precoUnitario, #quantidade').on('input', calcularTotal);
+        });
+    </script>
 }

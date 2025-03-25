@@ -29,14 +29,29 @@
 
             <div class="form-group">
                 <label asp-for="PrecoUnitario" class="control-label"></label>
-                <input asp-for="PrecoUnitario" class="form-control" placeholder="R$ 0,00" step="0.01" min="0.01" />
+                <input asp-for="PrecoUnitario" class="form-control" id="precoUnitario"
+                       placeholder="Ex: 19,99" step="0.01" />
                 <span asp-validation-for="PrecoUnitario" class="text-danger"></span>
             </div>
 
+            <!-- Campo de Quantidade -->
             <div class="form-group">
                 <label asp-for="Quantidade" class="control-label"></label>
-                <input asp-for="Quantidade" class="form-control" placeholder="1" min="1" />
+                <input asp-for="Quantidade" class="form-control" id="quantidade"
+                       placeholder="Ex: 3" min="1" />
                 <span asp-validation-for="Quantidade" class="text-danger"></span>
+            </div>
+
+            <!-- Exibição do Preço Total (somente leitura, não vinculado ao modelo) -->
+            <div class="form-group">
+                <label class="control-label">Preço Total</label>
+                <input type="text" class="form-control" id="precoTotal" readonly />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DataCadastro" class="control-label"></label>
+                <input asp-for="DataCadastro" class="form-control"/>
+                <span asp-validation-for="DataCadastro" class="text-danger"></span>
             </div>
 
             <div class="form-group">
@@ -59,5 +74,24 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        // Cálculo automático do preço total
+        $(document).ready(function() {
+            function atualizarPrecoTotal() {
+                const preco = parseFloat($('#precoUnitario').val().replace(',', '.')) || 0;
+                const qtd = parseInt($('#quantidade').val()) || 0;
+                const total = (preco * qtd).toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                });
+                $('#precoTotal').val(total);
+            }
+
+            $('#precoUnitario, #quantidade').on('input', atualizarPrecoTotal);
+        });
+    </script>
 }

@@ -48,7 +48,7 @@ namespace Uc_13_Caua_WebSite.Controllers
         // GET: Produtoes/Create
         public IActionResult Create()
         {
-            ViewData["FornecedorId"] = new SelectList(_context.Fornecedor, "FornecedorId", "CEP");
+            ViewData["FornecedorId"] = new SelectList(_context.Fornecedor, "FornecedorId", "FornecedorId");
             CarregarTiposProdutos();
             return View();
         }
@@ -75,12 +75,19 @@ namespace Uc_13_Caua_WebSite.Controllers
         {
             if (ModelState.IsValid)
             {
+               
+
                 _context.Add(produto);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+
+
             }
-            ViewData["FornecedorId"] = new SelectList(_context.Fornecedor, "FornecedorId", "CEP", produto.FornecedorId);
+            ViewData["FornecedorId"] = new SelectList(_context.Fornecedor, "FornecedorId", "FornecedorId", produto.FornecedorId);
+            CarregarTiposProdutos();
             return View(produto);
+            // Se houver erro, recarrega os dados necessários
+ 
         }
 
         // GET: Produtoes/Edit/5
@@ -96,20 +103,25 @@ namespace Uc_13_Caua_WebSite.Controllers
             {
                 return NotFound();
             }
-            ViewData["FornecedorId"] = new SelectList(_context.Fornecedor, "FornecedorId", "CEP", produto.FornecedorId);
+            ViewData["FornecedorId"] = new SelectList(_context.Fornecedor, "FornecedorId","FornecedorId",  produto.FornecedorId);
+            CarregarTiposProdutos();
             return View(produto);
+            
         }
+
 
         // POST: Produtoes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProdutoId,ProdutoNome,Tipo,PrecoUnitario,Quantidade,FornecedorId")] Produto produto)
+        public async Task<IActionResult> Edit(int id, [Bind("ProdutoId,ProdutoNome,Tipo,PrecoUnitario,Quantidade,DataCadastro,FornecedorId")] Produto produto)
         {
             if (id != produto.ProdutoId)
             {
+              
                 return NotFound();
+                
             }
 
             if (ModelState.IsValid)
@@ -130,9 +142,11 @@ namespace Uc_13_Caua_WebSite.Controllers
                         throw;
                     }
                 }
+             
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FornecedorId"] = new SelectList(_context.Fornecedor, "FornecedorId", "CEP", produto.FornecedorId);
+            ViewData["FornecedorId"] = new SelectList(_context.Fornecedor, "FornecedorId", "FornecedorId", produto.FornecedorId);
+            // Recarrega os dados se houver erro
             return View(produto);
         }
 

@@ -25,6 +25,12 @@
                 @Html.DisplayNameFor(model => model.Quantidade)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.PrecoTotal)
+            </th> 
+            <th>
+                @Html.DisplayNameFor(model => model.DataCadastro)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.fornecedor)
             </th>
             <th></th>
@@ -46,7 +52,13 @@
                 @Html.DisplayFor(modelItem => item.Quantidade)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.fornecedor.CEP)
+                @Html.DisplayFor(modelItem => item.PrecoTotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataCadastro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fornecedor.FornecedorId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ProdutoId">Edit</a> |

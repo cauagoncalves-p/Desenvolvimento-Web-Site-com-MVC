@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Uc_13_Caua_WebSite.Models
 {
@@ -29,10 +30,17 @@ namespace Uc_13_Caua_WebSite.Models
 
         [Display(Name = "Preço Total (R$)")]
         [DataType(DataType.Currency)]
-        public decimal PrecoTotal => PrecoUnitario * (decimal)Quantidade;
+        [NotMapped] //  Não mapeia para o banco nem exige no POST
+        public decimal PrecoTotal => PrecoUnitario * Quantidade;
 
-        [Display(Name = "ID Fornecedor")]
+
+        [Display(Name = "Data de Cadastro")]
+        [DataType(DataType.DateTime)]
+        public DateTime DataCadastro { get; set; } = DateTime.Now;
+
+
         public int FornecedorId { get; set; }
+        [Display(Name = "ID Fornecedor")]
         public Fornecedor? fornecedor { get; set; }
     }
 }
