@@ -1,4 +1,4 @@
-﻿@model Uc_13_Caua_WebSite.Models.Cliente
+﻿@model Uc_13_Caua_WebSite.Models.Fornecedor
 
 @{
     ViewData["Title"] = "Create";
@@ -6,7 +6,7 @@
 
 <h1>Create</h1>
 
-<h4>Cliente</h4>
+<h4>Fornecedor</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,20 +14,14 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" placeholder="Digite seu nome (ex: João)" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Sobrenome" class="control-label"></label>
-                <input asp-for="Sobrenome" class="form-control" placeholder="Digite seu sobrenome (ex: Silva)" />
-                <span asp-validation-for="Sobrenome" class="text-danger"></span>
+                <label asp-for="NomeFornecedor" class="control-label"></label>
+                <input asp-for="NomeFornecedor" class="form-control" placeholder="Ex: Empresa ABC Ltda" />
+                <span asp-validation-for="NomeFornecedor" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" placeholder="Digite seu email (ex: joao@exemplo.com)" />
+                <input asp-for="Email" class="form-control" placeholder="Ex: contato@empresa.com" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
 
@@ -38,14 +32,14 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="CPF" class="control-label"></label>
-                <input asp-for="CPF" class="form-control" placeholder="XXX.XXX.XXX-XX" />
-                <span asp-validation-for="CPF" class="text-danger"></span>
+                <label asp-for="CNPJ" class="control-label"></label>
+                <input asp-for="CNPJ" class="form-control" placeholder="XX.XXX.XXX/XXXX-XX" />
+                <span asp-validation-for="CNPJ" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="EnderecoCompleto" class="control-label"></label>
-                <input asp-for="EnderecoCompleto" class="form-control" placeholder="Rua, número, complemento, bairro" />
+                <input asp-for="EnderecoCompleto" class="form-control" placeholder="Av. Principal, 1234 - Centro" />
                 <span asp-validation-for="EnderecoCompleto" class="text-danger"></span>
             </div>
 
@@ -57,25 +51,27 @@
 
             <div class="form-group">
                 <label asp-for="Cidade" class="control-label"></label>
-                <input asp-for="Cidade" class="form-control" placeholder="Digite sua cidade" />
+                <input asp-for="Cidade" class="form-control" placeholder="Ex: São Paulo" />
                 <span asp-validation-for="Cidade" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Estado" class="control-label"></label>
-                <input asp-for="Estado" class="form-control" placeholder="Digite seu estado" />
+                <input asp-for="Estado" class="form-control" placeholder="Ex: São Paulo" />
                 <span asp-validation-for="Estado" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="UF" class="control-label"></label>
-                <input asp-for="UF" class="form-control" placeholder="UF (ex: SP)" maxlength="2" />
+                <select asp-for="UF" class="form-control" asp-items="ViewBag.Estados">
+                    <option value="">Selecione o Estado...</option>
+                </select>
                 <span asp-validation-for="UF" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Pais" class="control-label"></label>
-                <input asp-for="Pais" class="form-control" placeholder="Digite seu Pais" value="Brasil" />
+                <input asp-for="Pais" class="form-control" placeholder="Brasil" value="Brasil" />
                 <span asp-validation-for="Pais" class="text-danger"></span>
             </div>
 

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Uc_13_Caua_WebSite.Models.Cliente>
+﻿@model IEnumerable<Uc_13_Caua_WebSite.Models.Fornecedor>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,10 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sobrenome)
+                @Html.DisplayNameFor(model => model.NomeFornecedor)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Email)
@@ -25,7 +22,7 @@
                 @Html.DisplayNameFor(model => model.Celular)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CPF)
+                @Html.DisplayNameFor(model => model.CNPJ)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.EnderecoCompleto)
@@ -52,10 +49,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sobrenome)
+                @Html.DisplayFor(modelItem => item.NomeFornecedor)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
@@ -64,7 +58,7 @@
                 @Html.DisplayFor(modelItem => item.Celular)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CPF)
+                @Html.DisplayFor(modelItem => item.CNPJ)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EnderecoCompleto)
@@ -85,9 +79,9 @@
                 @Html.DisplayFor(modelItem => item.Pais)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ClienteId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ClienteId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ClienteId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.FornecedorId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.FornecedorId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.FornecedorId">Delete</a>
             </td>
         </tr>
 }

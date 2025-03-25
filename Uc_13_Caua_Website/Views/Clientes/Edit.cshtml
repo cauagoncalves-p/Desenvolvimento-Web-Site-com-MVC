@@ -13,63 +13,76 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ClienteId" />
+
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
+                <input asp-for="Nome" class="form-control" placeholder="Atualize o nome (ex: João)" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Sobrenome" class="control-label"></label>
-                <input asp-for="Sobrenome" class="form-control" />
+                <input asp-for="Sobrenome" class="form-control" placeholder="Atualize o sobrenome (ex: Silva)" />
                 <span asp-validation-for="Sobrenome" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+                <input asp-for="Email" class="form-control" placeholder="novo@email.com" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Celular" class="control-label"></label>
-                <input asp-for="Celular" class="form-control" />
+                <input asp-for="Celular" class="form-control" placeholder="(XX) XXXXX-XXXX" />
                 <span asp-validation-for="Celular" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="CPF" class="control-label"></label>
-                <input asp-for="CPF" class="form-control" />
+                <input asp-for="CPF" class="form-control" placeholder="XXX.XXX.XXX-XX" readonly />
                 <span asp-validation-for="CPF" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="EnderecoCompleto" class="control-label"></label>
-                <input asp-for="EnderecoCompleto" class="form-control" />
+                <input asp-for="EnderecoCompleto" class="form-control" placeholder="Nova rua, número, complemento" />
                 <span asp-validation-for="EnderecoCompleto" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="CEP" class="control-label"></label>
-                <input asp-for="CEP" class="form-control" />
+                <input asp-for="CEP" class="form-control" placeholder="XXXXX-XXX" />
                 <span asp-validation-for="CEP" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Cidade" class="control-label"></label>
-                <input asp-for="Cidade" class="form-control" />
+                <input asp-for="Cidade" class="form-control" placeholder="Nova cidade" />
                 <span asp-validation-for="Cidade" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Estado" class="control-label"></label>
-                <input asp-for="Estado" class="form-control" />
+                <input asp-for="Estado" class="form-control" placeholder="Novo estado" />
                 <span asp-validation-for="Estado" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="UF" class="control-label"></label>
-                <input asp-for="UF" class="form-control" />
+                <input asp-for="UF" class="form-control" placeholder="UF" maxlength="2" />
                 <span asp-validation-for="UF" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="País" class="control-label"></label>
-                <input asp-for="País" class="form-control" />
-                <span asp-validation-for="País" class="text-danger"></span>
+                <label asp-for="Pais" class="control-label"></label>
+                <input asp-for="Pais" class="form-control" placeholder="Pais" value="Brasil" />
+                <span asp-validation-for="Pais" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Salvar Alterações" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary ml-2">Cancelar</a>
             </div>
         </form>
     </div>

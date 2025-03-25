@@ -54,7 +54,7 @@ namespace Uc_13_Caua_WebSite.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClienteId,Nome,Sobrenome,Email,Celular,CPF,EnderecoCompleto,CEP,Cidade,Estado,UF,País")] Cliente cliente)
+        public async Task<IActionResult> Create([Bind("ClienteId,Nome,Sobrenome,Email,Celular,CPF,EnderecoCompleto,CEP,Cidade,Estado,UF,Pais")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace Uc_13_Caua_WebSite.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ClienteId,Nome,Sobrenome,Email,Celular,CPF,EnderecoCompleto,CEP,Cidade,Estado,UF,País")] Cliente cliente)
+        public async Task<IActionResult> Edit(int id, [Bind("ClienteId,Nome,Sobrenome,Email,Celular,CPF,EnderecoCompleto,CEP,Cidade,Estado,UF,Pais")] Cliente cliente)
         {
             if (id != cliente.ClienteId)
             {
