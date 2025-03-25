@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Uc_13_Caua_WebSite.Data;
 
@@ -10,9 +11,11 @@ using Uc_13_Caua_WebSite.Data;
 namespace Uc_13_Caua_WebSite.Migrations
 {
     [DbContext(typeof(Uc_13_Caua_WebSiteContext))]
-    partial class Uc_13_Caua_WebSiteContextModelSnapshot : ModelSnapshot
+    [Migration("20250325175347_tb_produto")]
+    partial class tb_produto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

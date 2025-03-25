@@ -59,5 +59,7 @@ namespace Uc_13_Caua_WebSite.Models
         [StringLength(100, ErrorMessage = "O nome do Pais não pode exceder 100 caracteres.")]
         [Display(Name = "País")]
         public string? Pais { get; set; }  
+
+        public ICollection<Produto>? Produtos {get; set;}
     }
 }
