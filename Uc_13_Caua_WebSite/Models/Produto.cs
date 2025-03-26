@@ -30,17 +30,17 @@ namespace Uc_13_Caua_WebSite.Models
 
         [Display(Name = "Preço Total (R$)")]
         [DataType(DataType.Currency)]
-        [NotMapped] //  Não mapeia para o banco nem exige no POST
+        [NotMapped]
         public decimal PrecoTotal => PrecoUnitario * Quantidade;
-
 
         [Display(Name = "Data de Cadastro")]
         [DataType(DataType.DateTime)]
         public DateTime DataCadastro { get; set; } = DateTime.Now;
 
-
         public int FornecedorId { get; set; }
         [Display(Name = "ID Fornecedor")]
         public Fornecedor? fornecedor { get; set; }
+
+        public ICollection<Pedido>? Pedidos { get; set; }   
     }
 }

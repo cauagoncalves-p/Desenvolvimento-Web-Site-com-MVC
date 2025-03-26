@@ -17,5 +17,6 @@ namespace Uc_13_Caua_WebSite.Data
         public DbSet<Uc_13_Caua_WebSite.Models.Cliente> Cliente { get; set; } = default!;
         public DbSet<Uc_13_Caua_WebSite.Models.Fornecedor> Fornecedor { get; set; } = default!;
         public DbSet<Uc_13_Caua_WebSite.Models.Produto> Produto { get; set; } = default!;
+        public DbSet<Uc_13_Caua_WebSite.Models.Pedido> Pedido { get; set; } = default!;
     }
 }

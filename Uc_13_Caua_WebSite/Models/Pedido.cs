@@ -10,34 +10,28 @@ namespace Uc_13_Caua_WebSite.Models
         [Display(Name = "ID Pedido")]
         public int PedidoId { get; set; }
 
-        [Required]
-        [Display(Name = "Cliente")]
-        public int ClienteId { get; set; }
-
-        [ForeignKey("ClienteId")]
-        [Display(Name = "Cliente")]
-        public virtual Cliente? Cliente { get; set; }
-
-        [Required]
-        [Display(Name = "Produto")]
-        public int ProdutoId { get; set; }
-
-        [ForeignKey("ProdutoId")]
-        [Display(Name = "Produto")]
-        public virtual Produto? Produto { get; set; }
-
         [Required(ErrorMessage = "A data do pedido é obrigatória")]
         [Display(Name = "Data do Pedido")]
         [DataType(DataType.DateTime)]
-        public DateTime DataPedido { get; set; } = DateTime.Now;
+        public DateTime DataPedido { get; set; } 
 
-        [Required(ErrorMessage = "A quantidade é obrigatória")]
-        [Range(1, int.MaxValue, ErrorMessage = "A quantidade deve ser no mínimo 1")]
-        [Display(Name = "Quantidade")]
-        public int Quantidade { get; set; }
+        [Range(1, int.MaxValue, ErrorMessage = "A quantidade deve ser pelo menos 1")]
+        public int Quantidade {get; set;}
 
         [Display(Name = "Preço")]
         [DataType(DataType.Currency)]
-        public decimal Preco { get; set; }
+        public decimal Preco {get; set;}
+
+        [NotMapped]
+        public decimal PrecoUnitario => Produto?.PrecoUnitario ?? 0;
+        public int ClienteId { get; set; }
+        [Required(ErrorMessage = "Selecione o ID do cliente")]
+        [Display(Name = "ID Cliente")]
+        public Cliente? Cliente { get; set; }
+
+        public int ProdutoId { get; set; }
+        [Required(ErrorMessage = "Selecione o ID do produto")]
+        [Display(Name = "ID Produto")]
+        public Produto? Produto { get; set; }
     }
 }
