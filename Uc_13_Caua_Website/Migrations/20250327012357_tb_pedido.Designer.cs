@@ -12,7 +12,7 @@ using Uc_13_Caua_WebSite.Data;
 namespace Uc_13_Caua_WebSite.Migrations
 {
     [DbContext(typeof(Uc_13_Caua_WebSiteContext))]
-    [Migration("20250325222656_tb_pedido")]
+    [Migration("20250327012357_tb_pedido")]
     partial class tb_pedido
     {
         /// <inheritdoc />
@@ -167,7 +167,7 @@ namespace Uc_13_Caua_WebSite.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Preco")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<int>("ProdutoId")
                         .HasColumnType("int");

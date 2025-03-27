@@ -164,7 +164,7 @@ namespace Uc_13_Caua_WebSite.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Preco")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<int>("ProdutoId")
                         .HasColumnType("int");
