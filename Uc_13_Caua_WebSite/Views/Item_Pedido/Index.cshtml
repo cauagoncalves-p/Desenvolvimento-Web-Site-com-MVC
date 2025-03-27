@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Uc_13_Caua_WebSite.Models.Item_Pedido>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Registro de itens</h1>
+
+<p>
+    <a asp-action="Create">Adiconar novo registro</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemPedidoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pedido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Produto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecoUnitario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Desconto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecoTotal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataAdicao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Observacoes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+           <td>
+              @Html.DisplayFor(modelItem => item.ItemPedidoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pedido.PedidoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Produto.ProdutoNome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrecoUnitario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Desconto)
+            </td> 
+            <td>
+                @Html.DisplayFor(modelItem => item.PrecoTotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataAdicao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Observacoes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ItemPedidoId">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.ItemPedidoId">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.ItemPedidoId">Deletar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

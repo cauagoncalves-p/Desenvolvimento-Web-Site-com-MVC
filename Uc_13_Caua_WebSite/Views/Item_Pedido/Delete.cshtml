@@ -1,0 +1,69 @@
+﻿@model Uc_13_Caua_WebSite.Models.Item_Pedido
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Deletar registro</h1>
+
+<h3>Você deseja deletar esse registro?</h3>
+<div>
+    <h4>Item_Pedido</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Pedido)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Pedido.PedidoId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Produto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Produto.ProdutoNome)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Quantidade)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Quantidade)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PrecoUnitario)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PrecoUnitario)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Desconto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Desconto)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DataAdicao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DataAdicao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Observacoes)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Observacoes)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ItemPedidoId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Voltar para a página principal</a>
+    </form>
+</div>

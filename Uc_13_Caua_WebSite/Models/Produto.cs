@@ -41,6 +41,7 @@ namespace Uc_13_Caua_WebSite.Models
         [Display(Name = "ID Fornecedor")]
         public Fornecedor? fornecedor { get; set; }
 
-        public ICollection<Pedido>? Pedidos { get; set; }   
+        public ICollection<Pedido>? Pedidos { get; set; }
+        public ICollection<Item_Pedido>? Item_Pedidos { get; set; }
     }
 }

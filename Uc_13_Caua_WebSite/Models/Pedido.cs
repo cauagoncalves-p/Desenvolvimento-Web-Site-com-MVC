@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.ObjectModel;
 
 namespace Uc_13_Caua_WebSite.Models
 {
@@ -59,5 +60,7 @@ namespace Uc_13_Caua_WebSite.Models
                 Preco = Quantidade * produto.PrecoUnitario;
             }
         }
+
+        public ICollection<Item_Pedido>? Item_Pedidos { get; set; }
     }
 }
