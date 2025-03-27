@@ -19,82 +19,92 @@ namespace Uc_13_Caua_WebSite.Controllers
             _context = context;
         }
 
-
         // GET: Pedidoes
         public async Task<IActionResult> Index()
         {
-            var pedidos = await _context.Pedido
-                .Include(p => p.Cliente)
-                .Include(p => p.Produto)
-                .ToListAsync();
-            return View(pedidos);
+            var uc_13_Caua_WebSiteContext = _context.Pedido.Include(p => p.Cliente).Include(p => p.Produto);
+            return View(await uc_13_Caua_WebSiteContext.ToListAsync());
         }
 
         // GET: Pedidoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null) return NotFound();
+            if (id == null)
+            {
+                return NotFound();
+            }
 
             var pedido = await _context.Pedido
                 .Include(p => p.Cliente)
                 .Include(p => p.Produto)
                 .FirstOrDefaultAsync(m => m.PedidoId == id);
-
-            return pedido == null ? NotFound() : View(pedido);
-        }
-
-        // GET: Pedidoes/Create
-        public async Task<IActionResult> Create()
-        {
-            ViewData["ClienteId"] = new SelectList(await _context.Cliente.ToListAsync(), "ClienteId", "ClienteId");
-            ViewData["ProdutoId"] = new SelectList(await _context.Produto.ToListAsync(), "ProdutoId", "ProdutoId");
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PedidoId,DataPedido,Quantidade,ClienteId,ProdutoId")] Pedido pedido)
-        {
-            var produto = await _context.Produto.FindAsync(pedido.ProdutoId);
-
-            // Validação de estoque
-            if (produto == null || pedido.Quantidade > produto.Quantidade)
+            if (pedido == null)
             {
-                ModelState.AddModelError(nameof(Pedido.Quantidade),
-                    $"Estoque insuficiente. Máximo disponível: {produto?.Quantidade ?? 0}");
+                return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
-                // Calcula o preço total
-                pedido.Preco = pedido.Quantidade * produto.PrecoUnitario;
-                pedido.DataPedido = DateTime.Now;
-
-                _context.Add(pedido);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-
-            // Recarrega os dados se houver erro
-            ViewData["ClienteId"] = new SelectList(await _context.Cliente.ToListAsync(), "ClienteId", "ClienteId", pedido.ClienteId);
-            ViewData["ProdutoId"] = new SelectList(await _context.Produto.ToListAsync(), "ProdutoId", "ProdutoId", pedido.ProdutoId);
             return View(pedido);
         }
 
-        [HttpGet]
-        public async Task<JsonResult> GetProdutoInfo(int produtoId)
+        // GET: Pedidoes/Create
+        public IActionResult Create()
         {
-            var produto = await _context.Produto
-                .Where(p => p.ProdutoId == produtoId)
-                .Select(p => new {
-                    precoUnitario = p.PrecoUnitario,
-                    estoque = p.Quantidade
-                })
-                .FirstOrDefaultAsync();
-
-            return Json(produto ?? new { precoUnitario = 0m, estoque = 0 });
+            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "CEP");
+            ViewData["ProdutoId"] = new SelectList(_context.Produto, "ProdutoId", "ProdutoNome");
+            return View();
         }
 
+        // POST: Pedidoes/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("PedidoId,Quantidade,ClienteId,ProdutoId,Preco,DataPedido")] Pedido pedido)
+        {
+            // 1. Primeiro carrega as listas (para caso precise retornar a view)
+            ViewData["ClienteId"] = new SelectList(await _context.Cliente.ToListAsync(), "ClienteId", "Nome", pedido.ClienteId);
+            ViewData["ProdutoId"] = new SelectList(await _context.Produto.ToListAsync(), "ProdutoId", "Nome", pedido.ProdutoId);
+
+            // 2. Validação básica do ModelState
+            if (!ModelState.IsValid)
+            {
+                return View(pedido);
+            }
+
+            // 3. Busca o produto (assíncrono)
+            var produto = await _context.Produto.FindAsync(pedido.ProdutoId);
+
+            // 4. Validações de negócio ANTES de salvar
+            var erroValidacao = pedido.ValidarEstoque(produto);
+            if (erroValidacao != null)
+            {
+                ModelState.AddModelError("", erroValidacao);
+                return View(pedido);
+            }
+
+            // 5. Cálculos automáticos
+            pedido.CalcularPrecoTotal(produto);
+            pedido.DataPedido = DateTime.Now;
+
+            // 6. Tentativa de salvamento
+            try
+            {
+                _context.Pedido.Add(pedido);
+                await _context.SaveChangesAsync();
+                TempData["Sucesso"] = "Pedido cadastrado com sucesso!";
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException ex)
+            {
+                ModelState.AddModelError("", $"Erro no banco de dados: {ex.InnerException?.Message ?? ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", $"Erro inesperado: {ex.Message}");
+            }
+
+            return View(pedido);
+        }
 
         // GET: Pedidoes/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -109,8 +119,8 @@ namespace Uc_13_Caua_WebSite.Controllers
             {
                 return NotFound();
             }
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "ClienteId", pedido.ClienteId);
-            ViewData["ProdutoId"] = new SelectList(_context.Produto, "ProdutoId", "ProdutoId", pedido.ProdutoId);
+            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "CEP", pedido.ClienteId);
+            ViewData["ProdutoId"] = new SelectList(_context.Produto, "ProdutoId", "ProdutoNome", pedido.ProdutoId);
             return View(pedido);
         }
 
@@ -119,7 +129,7 @@ namespace Uc_13_Caua_WebSite.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PedidoId,DataPedido,Quantidade,Preco,ClienteId,ProdutoId")] Pedido pedido)
+        public async Task<IActionResult> Edit(int id, [Bind("PedidoId,Quantidade,ClienteId,ProdutoId,Preco,DataPedido")] Pedido pedido)
         {
             if (id != pedido.PedidoId)
             {
@@ -146,8 +156,8 @@ namespace Uc_13_Caua_WebSite.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "ClienteId", pedido.ClienteId);
-            ViewData["ProdutoId"] = new SelectList(_context.Produto, "ProdutoId", "ProdutoId", pedido.ProdutoId);
+            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "CEP", pedido.ClienteId);
+            ViewData["ProdutoId"] = new SelectList(_context.Produto, "ProdutoId", "ProdutoNome", pedido.ProdutoId);
             return View(pedido);
         }
 

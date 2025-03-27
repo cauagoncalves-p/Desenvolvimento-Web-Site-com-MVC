@@ -12,12 +12,6 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataPedido)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataPedido)
-        </dd>
-        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Quantidade)
         </dt>
         <dd class = "col-sm-10">
@@ -30,16 +24,22 @@
             @Html.DisplayFor(model => model.Preco)
         </dd>
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DataPedido)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DataPedido)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Cliente)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cliente.ClienteId)
+            @Html.DisplayFor(model => model.Cliente.CEP)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Produto)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Produto.ProdutoId)
+            @Html.DisplayFor(model => model.Produto.ProdutoNome)
         </dd>
     </dl>
     
