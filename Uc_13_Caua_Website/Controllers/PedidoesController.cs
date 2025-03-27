@@ -119,7 +119,7 @@ namespace Uc_13_Caua_WebSite.Controllers
             {
                 return NotFound();
             }
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "CEP", pedido.ClienteId);
+            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Nome", pedido.ClienteId);
             ViewData["ProdutoId"] = new SelectList(_context.Produto, "ProdutoId", "ProdutoNome", pedido.ProdutoId);
             return View(pedido);
         }
@@ -156,7 +156,7 @@ namespace Uc_13_Caua_WebSite.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "CEP", pedido.ClienteId);
+            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Nome", pedido.ClienteId);
             ViewData["ProdutoId"] = new SelectList(_context.Produto, "ProdutoId", "ProdutoNome", pedido.ProdutoId);
             return View(pedido);
         }
