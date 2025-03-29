@@ -16,13 +16,43 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         return View();
-    }
-
-    public IActionResult Privacy()
+    } 
+    public IActionResult Login()
     {
         return View();
     }
+    public IActionResult Cadastro()
+    {
+        return View();
+    }
+    public IActionResult PaginaSkatesMontados()
+    {
+        return View();
+    }
+    public IActionResult FinalizarCompra()
+    {
+        return View();
+    } 
+    public IActionResult Produtos()
+    {
+        return View();
+    }
+    public IActionResult VerProduto()
+    {
+        return View();
+    }
+    public IActionResult PaginaCamisetas() {
+        return View();
+    }
 
+    public IActionResult PaginaDeShapes() 
+    {
+        return View();
+    }
+    public IActionResult PaginaDeTenis()
+    {
+        return View();
+    }
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
