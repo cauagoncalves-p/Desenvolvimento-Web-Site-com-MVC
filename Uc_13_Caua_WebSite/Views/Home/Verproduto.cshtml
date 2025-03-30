@@ -63,11 +63,20 @@
 
         <nav class="menu-nav">
             <ul>
-                <li><a href="~/index.html">Inicio</a></li>
-                <li><a href="~/PaginaSkatesMontados.html">Skates Montados</a></li>
-                <li><a href="~/paginaSobre.html">Sobre a skate tech</a></li>
-                <li><a href="~/produtos.html">Produtos</a></li>
-                <li><a href="~/paginaContato.html">Contato</a></li>
+                <!-- Início -->
+                <li><a asp-controller="Home" asp-action="Index">Início</a></li>
+
+                <!-- Skates Montados -->
+                <li><a asp-controller="Home" asp-action="PaginaSkatesMontados">Skates Montados</a></li>
+
+                <!-- Sobre a Skate Tech -->
+                <li><a asp-controller="Home" asp-action="PaginaSobre">Sobre a Skate Tech</a></li>
+
+                <!-- Produtos -->
+                <li><a asp-controller="Home" asp-action="Produtos">Produtos</a></li>
+
+                <!-- Contato -->
+                <li><a asp-controller="Home" asp-action="PaginaContato">Contato</a></li>
             </ul>
         </nav>
     </header>
@@ -149,6 +158,7 @@
         <div class="skate-vmenu">
             <ol>
                 <a asp-controller="Home" asp-action="Index">Home</a>
+                <a asp-controller="Home" asp-action="Produtos">> Página de produtos</a>
                 <span>> @ViewBag.Nome</span>
             </ol>
         </div>
