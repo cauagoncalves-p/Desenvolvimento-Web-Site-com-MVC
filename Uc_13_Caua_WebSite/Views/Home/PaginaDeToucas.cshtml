@@ -2,9 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-	ViewBag.Title = "Página de Tênis";
 }
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -14,41 +12,41 @@
           rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
           crossorigin="anonymous" />
-    <link rel="stylesheet" href="~/styles/sytleProdutos-tenis.css" />
+    <link rel="stylesheet" href="~/styles/sytleProdutos-toucas.css" />
     <link rel="stylesheet" href="~/styles/syleModal.css" />
     <link rel="stylesheet" href="~/styles/Carrinho.css">
-    <title>Tênis</title>
+    <title>Toucas</title>
 </head>
 <body>
+    <!--Cabeçalho do site-->
     <header>
         <nav class="info-nav">
             <div class="logo">
                 <img src="~/imagens/logo/logo-header.png" alt="Logo do Skate Tech" />
             </div>
-
             <div class="input">
                 <input type="text" placeholder="O que você está buscando?" />
-                <i class="fa-solid fa-magnifying-glass"></i>
+                <i class="fa-solid fa-magnifying-glass" aria-label="Buscar"></i>
             </div>
-
             <div class="icons-info">
+                <!-- Elemento que abre o modal -->
                 <div id="openModal">
-                    <i class="fa-solid fa-comments"></i>
+                    <i class="fa-solid fa-comments" aria-label="Atendimento"></i>
                     <p>Atendimento</p>
                 </div>
 
                 <div class="user-menu">
+
                     <div class="user-icon">
-                        <i class="fa-regular fa-user"></i>
+                        <i class="fa-regular fa-user" aria-label="Usuário"></i>
                         <p>Usuário</p>
                     </div>
 
                     <div class="dropdown-menu">
-                        <a href="login.html">Fazer Login</a>
-                        <a href="~/login.html">Criar Conta</a>
+                        <a asp-controller="Home" asp-action="Login">Login</a>
+                        <a asp-controller="Home" asp-action="Cadastro">Criar conta</a>
                     </div>
                 </div>
-
                 <div class="cart-container"
                      data-bs-toggle="offcanvas"
                      data-bs-target="#offcanvasRight"
@@ -62,7 +60,6 @@
             </div>
         </nav>
         <hr />
-
         <nav class="menu-nav">
             <ul>
                 <!-- Início -->
@@ -83,6 +80,8 @@
         </nav>
     </header>
 
+    <!-- Ícone do Carrinho com Badge -->
+
     <div class="offcanvas offcanvas-end"
          tabindex="-1"
          id="offcanvasRight"
@@ -95,10 +94,12 @@
                     aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
+            <!-- Container dos Produtos (inicia vazio) -->
             <div class="produtos-lista" id="cart-list">
                 <p id="empty-cart-msg">Seu carrinho está vazio.</p>
             </div>
 
+            <!-- Rodapé Fixo -->
             <div class="info-compra">
                 <div class="info-frete">
                     <hr />
@@ -115,19 +116,24 @@
                     <p id="cart-subtotal">Subtotal: <strong>R$ 0,00</strong></p>
                 </div>
                 <div class="button-comprar">
-                    <a href="~/finalizarCompra.html"><button>Finalizar Compra</button></a>
+                    <a asp-controller="Home" asp-action="FinalizarCompra">
+                        <button>Finalizar Compra</button>
+                    </a>
                     <a id="voltar">Continuar comprando</a>
                 </div>
             </div>
         </div>
     </div>
 
+
+    <!-- Modal de Atendimento -->
     <div id="atendimentoModal" class="modal-atendimento">
         <div class="modal-content">
             <div class="cabecalho-modal">
                 <span class="close" id="closeBtn">&times;</span>
                 <h2>Informações de Atendimento</h2>
             </div>
+            <!-- WhatsApp -->
             <div class="tipos-contato">
                 <p>Atendimento Via WhatsApp</p>
                 <div class="whatsapp">
@@ -135,6 +141,7 @@
                     <span>(11) 99999-9999</span>
                 </div>
             </div>
+            <!-- Email -->
             <div class="tipos-contato">
                 <p>Atendimento Via Email</p>
                 <div class="email-modal">
@@ -142,20 +149,22 @@
                     <span>atendimentoskateshop@senac.com</span>
                 </div>
             </div>
+            <!-- Horário de atendimento -->
             <div class="tipos-contato">
                 <p>Horário de Atendimento</p>
                 <div class="horario">
                     <i class="fa-solid fa-clock"></i>
-                    <span>Segunda a sexta das 08h as 18h</span>
+                    <span>Segunda a sexta das 08h às 18h</span>
                 </div>
             </div>
+            <!-- Nosso endereço -->
             <div class="tipos-contato">
                 <p>Nosso Endereço</p>
                 <div class="endereco">
                     <span>SKATE TECH</span>
                     <span>Rua Senac, 123 - São Paulo - SP</span>
                     <span>São Paulo/SP</span>
-                    <span>CEP: 090720-004</span>
+                    <span>CEP: 09072-004</span>
                 </div>
             </div>
         </div>
@@ -167,7 +176,7 @@
                 <ol>
                     <a asp-controller="Home" asp-action="Index">Home</a>
                     <span>> <a asp-controller="Home" asp-action="Produtos">Pagina de Produtos</a></span>
-                    <span>> TÊNIS</span>
+                    <span>> TOUCAS</span>
                 </ol>
             </div>
 
@@ -198,15 +207,23 @@
             <div class="filtragem-produtos">
                 <div>
                     <div class="categoria">
-                        <h4>Tênis</h4>
-                        <p class="label-grup">Nike SB</p>
-                        <p class="label-grup">Vans</p>
-                        <p class="label-grup">Adidas</p>
-                        <p class="label-grup">DC Shoes</p>
-                        <p class="label-grup">Element</p>
-                        <p class="label-grup-none hidden">Converse</p>
-                        <p class="label-grup-none hidden">New Balance</p>
-                        <p class="label-grup-none hidden">Lakai</p>
+                        <h4>Toucas</h4>
+                        <p class="label-grup">Girl Skateboards</p>
+                        <p class="label-grup">Chocolate Skateboards</p>
+                        <p class="label-grup">Spitfire Wheels</p>
+                        <p class="label-grup">Royal Trucks</p>
+                        <p class="label-grup">Thunder Trucks</p>
+                        <p class="label-grup-none hidden">Bones</p>
+                        <p class="label-grup-none hidden">Anti Hero Skateboards</p>
+                        <p class="label-grup-none hidden">Vans</p>
+                        <p class="label-grup-none hidden">High Company</p>
+                        <p class="label-grup-none hidden">Primitive</p>
+                        <p class="label-grup-none hidden">LRG</p>
+                        <p class="label-grup-none hidden">Thrasher</p>
+                        <p class="label-grup-none hidden">DC Shoes</p>
+                        <p class="label-grup-none hidden">Black Sheep</p>
+                        <p class="label-grup-none hidden">Element</p>
+                        <p class="label-grup-none hidden">RVCA</p>
                         <button class="verMais">Ver mais</button>
                     </div>
 
@@ -247,56 +264,73 @@
                         <button class="verMais">Ver mais</button>
                     </div>
 
+                    <h6>Modelos</h6>
                     <div class="checkbox">
-                        <h6>Tamanho</h6>
-                        <label><input type="checkbox" /><span></span>34</label>
-                        <label><input type="checkbox" /><span></span>35</label>
-                        <label><input type="checkbox" /><span></span>36</label>
-                        <label><input type="checkbox" /><span></span>37</label>
-                        <label><input type="checkbox" /><span></span>38</label>
-                        <label><input type="checkbox" /><span></span>39</label>
-                        <label><input type="checkbox" /><span></span>40</label>
-                        <label><input type="checkbox" /><span></span>41</label>
-                        <label><input type="checkbox" /><span></span>42</label>
-                        <label><input type="checkbox" /><span></span>43</label>
-                        <label><input type="checkbox" /><span></span>44</label>
+                        <label class="label-grup">
+                            <input type="checkbox" /><span></span>Gorro clássico
+                        </label>
+                        <label class="label-grup">
+                            <input type="checkbox" /><span></span>Gorro slouchy
+                        </label>
+                        <label class="label-grup">
+                            <input type="checkbox" /><span></span>Gorro com dobra
+                        </label>
+                        <label class="label-grup">
+                            <input type="checkbox" /><span></span>Gorro sem dobra
+                        </label>
                     </div>
 
+                    <h6>Material</h6>
                     <div class="checkbox">
-                        <h6>Tipo de Solado</h6>
-                        <label><input type="checkbox" /><span></span>Vulcanizado</label>
-                        <label><input type="checkbox" /><span></span>Cupsole</label>
+                        <label class="label-grup">
+                            <input type="checkbox" /><span></span>Algodão
+                        </label>
+                        <label class="label-grup">
+                            <input type="checkbox" /><span></span>Lã
+                        </label>
+                        <label class="label-grup">
+                            <input type="checkbox" /><span></span>Acrílico
+                        </label>
+                        <label class="label-grup">
+                            <input type="checkbox" /><span></span>Misto
+                        </label>
                     </div>
 
+                    <h6>Tamanho</h6>
                     <div class="checkbox">
-                        <h6>Material</h6>
-                        <label><input type="checkbox" /><span></span>Couro</label>
-                        <label><input type="checkbox" /><span></span>Camurça</label>
-                        <label><input type="checkbox" /><span></span>Tecido</label>
-                        <label><input type="checkbox" /><span></span>Sintético</label>
-                    </div>
-
-                    <div class="checkbox">
-                        <h6>Estilo</h6>
-                        <label><input type="checkbox" /><span></span>Canos Baixos</label>
-                        <label><input type="checkbox" /><span></span>Canos Médios</label>
-                        <label><input type="checkbox" /><span></span>Canos Altos</label>
+                        <label class="label-grup">
+                            <input type="checkbox" /><span></span>Único
+                        </label>
+                        <label class="label-grup">
+                            <input type="checkbox" /><span></span>P
+                        </label>
+                        <label class="label-grup">
+                            <input type="checkbox" /><span></span>M
+                        </label>
+                        <label class="label-grup">
+                            <input type="checkbox" /><span></span>G
+                        </label>
+                        <label class="label-grup">
+                            <input type="checkbox" /><span></span>GG
+                        </label>
                     </div>
 
                     <h6>Preços</h6>
                     <div class="preco">
                         <div>
                             <label>De</label><br />
-                            <input type="number" placeholder="R$100,00" />
+                            <input type="number" placeholder="R$50,00" />
                         </div>
+
                         <div>
                             <label>Até</label><br />
                             <input type="number" placeholder="R$500,00" />
                         </div>
                     </div>
                 </div>
+
                 <section class="aba-produtos">
-                    <!-- Inserindo os produtos com JavaScript -->
+                    <!--Inserindo os produtos com javascript-->
                 </section>
             </div>
 
@@ -377,7 +411,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"></script>
-    <script src="~/js/produto-tenis.js"></script>
+    <script src="~/js/produtos-toucas.js"></script>
     <script src="~/js/Carrinho.js"></script>
 </body>
 </html>
