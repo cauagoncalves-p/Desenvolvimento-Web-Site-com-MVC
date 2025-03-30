@@ -2,7 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-	ViewBag.Title = "Ver Produto";
+    ViewBag.Title = "Ver Produto";
 }
 
 <!DOCTYPE html>
@@ -64,7 +64,7 @@
         <nav class="menu-nav">
             <ul>
                 <li><a href="~/index.html">Inicio</a></li>
-                <li><a href="~/~/PaginaSkatesMontados.html">Skates Montados</a></li>
+                <li><a href="~/PaginaSkatesMontados.html">Skates Montados</a></li>
                 <li><a href="~/paginaSobre.html">Sobre a skate tech</a></li>
                 <li><a href="~/produtos.html">Produtos</a></li>
                 <li><a href="~/paginaContato.html">Contato</a></li>
@@ -144,51 +144,54 @@
         </div>
     </div>
 
+
     <main class="main-produto">
         <div class="skate-vmenu">
             <ol>
-                <a href="~/index.html">Home</a>
-                <span>> Pagina ver produto</span>
+                <a asp-controller="Home" asp-action="Index">Home</a>
+                <span>> @ViewBag.Nome</span>
             </ol>
         </div>
+
         <div class="sessao-produto">
             <div class="org-produto">
                 <div class="imagem-produto">
                     <div class="org-imagens">
                         <div class="container">
-                            <img id="imagemProduto" class="imagem" src="" alt="" />
+                            <img id="imagemProduto" class="imagem" src="@ViewBag.Imagem" alt="@ViewBag.TextoAlternativo" />
                             <div class="zoom" id="zoom"></div>
                         </div>
                         <div>
                             <div class="img-next">
-                                <img id="imagem-demostracao1" src="" alt="" />
+                                <img src="@ViewBag.ImagemDemo1" alt="Imagem demonstração 1" />
                             </div>
                             <div class="img-next">
-                                <img id="imagem-demostracao2" src="" alt="" />
+                                <img src="@ViewBag.ImagemDemo2" alt="Imagem demonstração 2" />
                             </div>
                             <div class="img-next">
-                                <img id="imagem-demostracao3" src="" alt="" />
+                                <img src="@ViewBag.ImagemDemo3" alt="Imagem demonstração 3" />
                             </div>
                         </div>
                     </div>
                     <div class="discricao-produto">
                         <h4>Descrição do Produto</h4>
-                        <p id="descricaoproduto"></p>
+                        <p>@ViewBag.Descricao</p>
                     </div>
                 </div>
 
                 <div class="info-produto">
-                    <h3 id="nomeProduto"></h3>
+                    <h3>@ViewBag.Nome</h3>
                     <div class="precos-produto">
-                        <p id="preco"></p>
-                        <p id="precoDesconto"></p>
+                        <p>@ViewBag.Preco</p>
+                        <p>@ViewBag.PrecoDesconto</p>
                     </div>
+
                     <div class="info-pagamento">
-                        <span id="opcaoParcelamento"></span>
+                        <span>@ViewBag.Parcelamento</span>
                         <div class="icone-pagamento">
-                            <img src="~/imagens/imagens pagamentos/mastercard.png" alt="" />
-                            <img src="~/imagens/imagens pagamentos/visa.png" alt="" />
-                            <img src="~/imagens/imagens pagamentos/mercado pago.png" alt="" />
+                            <img src="~/imagens/imagens pagamentos/mastercard.png" alt="Mastercard" />
+                            <img src="~/imagens/imagens pagamentos/visa.png" alt="Visa" />
+                            <img src="~/imagens/imagens pagamentos/mercado pago.png" alt="Mercado Pago" />
                         </div>
                         <span class="info-pagPix">
                             <strong>5% de desconto</strong> pagando com
@@ -196,7 +199,9 @@
                         </span>
                         <hr />
                     </div>
+
                     <button class="btn-produto">COMPRAR</button>
+
                     <div class="envio-produto">
                         <i class="fa-solid fa-truck-moving"></i>
                         <span>Meios de envio</span>
@@ -206,6 +211,7 @@
                         </div>
                         <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="_blank">Não sei o meu CEP</a>
                     </div>
+
                     <div class="loja">
                         <i class="fa-solid fa-store"></i>
                         <span>Nossa Loja</span>
@@ -222,23 +228,8 @@
                 </div>
             </div>
         </div>
-
-        <div class="comentario-produto">
-            <div class="comentario">
-                <div></div>
-                <hr />
-                <div class="input-comentario">
-                    <i class="fa-solid fa-user"></i>
-                    <input type="text" placeholder="Adicione um comentário" />
-                </div>
-                <hr />
-            </div>
-        </div>
-
-        <a href="https://wa.me/559999999999" class="whatsapp-button" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
-        </a>
     </main>
+
 
     <footer>
         <div class="footer-info">
@@ -254,10 +245,10 @@
 
             <div class="footer-instituicao">
                 <h3>INSTITUCIONAL</h3>
-                <a href="~/paginaSobre.html">Quem somos</a>
-                <a href="~/paginaContato.html">Fale conosco</a>
-                <a href="~/produtos.html">Produtos</a>
-                <a href="">Política de privacidade</a>
+                <a asp-controller="Home" asp-action="PaginaSobre">Quem somos</a>
+                <a asp-controller="Home" asp-action="PaginaContato">Fale conosco</a>
+                <a asp-controller="Home" asp-action="Produtos">Produtos</a>
+                <a asp-controller="Home" asp-action="Privacidade">Política de privacidade</a>
                 <a href="https://github.com/cauagoncalves-p" target="_blank">GitHub</a>
                 <a href="https://www.sp.senac.br/" target="_blank">Senac</a>
             </div>

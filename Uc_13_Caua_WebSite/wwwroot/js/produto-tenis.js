@@ -168,10 +168,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-
 function verProduto(nome, preco, precoDesconto, imagem, parcelamento, descricao, textoAlternativo, imagemDemostracao1, imagemDemostracao2, imagemDemostracao3) {
-  const url = `verProduto.html?nome=${nome}&preco=${preco}&precoDesconto=${precoDesconto}&imagem=${imagem}&parcelamento=${parcelamento}&descricao=${descricao}&textoAlternativo=${textoAlternativo}&imagemDemostracao1=${imagemDemostracao1}&imagemDemostracao2=${imagemDemostracao2}&imagemDemostracao3=${imagemDemostracao3}`;
-  window.location.href = url;
+    // Corrigindo o formato da URL
+    const url = `/Home/VerProduto?nome=${encodeURIComponent(nome)}&preco=${encodeURIComponent(preco)}&precoDesconto=${encodeURIComponent(precoDesconto)}&imagem=${encodeURIComponent(imagem)}&parcelamento=${encodeURIComponent(parcelamento)}&descricao=${encodeURIComponent(descricao)}&textoAlternativo=${encodeURIComponent(textoAlternativo)}&imagemDemostracao1=${encodeURIComponent(imagemDemostracao1)}&imagemDemostracao2=${encodeURIComponent(imagemDemostracao2)}&imagemDemostracao3=${encodeURIComponent(imagemDemostracao3)}`;
+
+    window.location.href = url;
 }
   
   // função para abrir a opção de filtros da pagina de skate

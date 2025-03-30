@@ -204,39 +204,40 @@ document.addEventListener('DOMContentLoaded', () => {
           descricao: 'O Truck Thunder Polished 147mm une design sofisticado e alta performance. Com acabamento polido e construção robusta, proporciona estabilidade e controle excepcionais, ideal para manobras radicais e uso prolongado.'
       }
   ];
-  const produtosGrid = document.querySelector('.aba-produtos');
+    const produtosGrid = document.querySelector('.aba-produtos');
 
-  produtosLoja.forEach(prod => {
-      const produtosCard = document.createElement('div');
-      produtosCard.classList.add('card-produtos');
+    produtosLoja.forEach(prod => {
+        const produtosCard = document.createElement('div');
+        produtosCard.classList.add('card-produtos');
 
-      produtosCard.innerHTML = `
-          <div class="card-imagem">
-              <img src="${prod.image}" alt="${prod.textoAlternativo}">
-              <div class="card-imagem-hover">
-                  <img src="${prod.imagem1}" alt="${prod.textoAlternativo}">
-              </div>
-          </div>
-          <div class="info-produtos">
-              <h4>${prod.classificacao}</h4>
-              <h3>${prod.titulo.toUpperCase()}</h3>
-              <div class="precos">
-                  <span>${prod.preco}</span>
-                  <p>${prod.precoDesconto}</p>
-              </div>
-              <p class="parcelamento">${prod.parcelamento}</p>
-          </div>
-        <button class="botao-cardProdutos" onclick="verProduto('${encodeURIComponent(prod.titulo)}', '${encodeURIComponent(prod.preco)}', '${encodeURIComponent(prod.precoDesconto)}', '${encodeURIComponent(prod.image)}','${encodeURIComponent(prod.parcelamento)}', '${encodeURIComponent(prod.descricao)}', '${encodeURIComponent(prod.textoAlternativo)}', '${encodeURIComponent(prod.imagemDemostracao1)}', '${encodeURIComponent(prod.imagemDemostracao2)}', '${encodeURIComponent(prod.imagemDemostracao3)}')">Ver Produto</button>
-    `;
+        produtosCard.innerHTML = `
+                <div class="card-imagem">
+                    <img src="${prod.image}" alt="${prod.textoAlternativo}">
+                    <div class="card-imagem-hover">
+                        <img src="${prod.imagem1}" alt="${prod.textoAlternativo}">
+                    </div>
+                </div>
+                <div class="info-produtos">
+                    <h4>${prod.classificacao}</h4>
+                    <h3>${prod.titulo.toUpperCase()}</h3>
+                    <div class="precos">
+                        <span>${prod.preco}</span>
+                        <p>${prod.precoDesconto}</p>
+                    </div>
+                    <p class="parcelamento">${prod.parcelamento}</p>
+                </div>
+              <button class="botao-cardProdutos" onclick="verProduto('${encodeURIComponent(prod.titulo)}', '${encodeURIComponent(prod.preco)}', '${encodeURIComponent(prod.precoDesconto)}', '${encodeURIComponent(prod.image)}','${encodeURIComponent(prod.parcelamento)}', '${encodeURIComponent(prod.descricao)}', '${encodeURIComponent(prod.textoAlternativo)}', '${encodeURIComponent(prod.imagemDemostracao1)}', '${encodeURIComponent(prod.imagemDemostracao2)}', '${encodeURIComponent(prod.imagemDemostracao3)}')">Ver Produto</button>
+          `;
 
-      produtosGrid.appendChild(produtosCard);
-  });
+        produtosGrid.appendChild(produtosCard);
+    });
 });
 
-
 function verProduto(nome, preco, precoDesconto, imagem, parcelamento, descricao, textoAlternativo, imagemDemostracao1, imagemDemostracao2, imagemDemostracao3) {
-  const url = `VerProduto.cshtml?nome=${nome}&preco=${preco}&precoDesconto=${precoDesconto}&imagem=${imagem}&parcelamento=${parcelamento}&descricao=${descricao}&textoAlternativo=${textoAlternativo}&imagemDemostracao1=${imagemDemostracao1}&imagemDemostracao2=${imagemDemostracao2}&imagemDemostracao3=${imagemDemostracao3}`;
-  window.location.href = url;
+    // Corrigindo o formato da URL
+    const url = `/Home/VerProduto?nome=${encodeURIComponent(nome)}&preco=${encodeURIComponent(preco)}&precoDesconto=${encodeURIComponent(precoDesconto)}&imagem=${encodeURIComponent(imagem)}&parcelamento=${encodeURIComponent(parcelamento)}&descricao=${encodeURIComponent(descricao)}&textoAlternativo=${encodeURIComponent(textoAlternativo)}&imagemDemostracao1=${encodeURIComponent(imagemDemostracao1)}&imagemDemostracao2=${encodeURIComponent(imagemDemostracao2)}&imagemDemostracao3=${encodeURIComponent(imagemDemostracao3)}`;
+
+    window.location.href = url;
 }
 
 // função para abrir a opção de filtros da pagina de skate
@@ -246,76 +247,76 @@ const arrow = document.querySelector('.arrow');
 const selectedText = document.getElementById('selected-option');
 
 dropdownBtn.addEventListener('click', () => {
-  dropdownMenu.classList.toggle('show');
+    dropdownMenu.classList.toggle('show');
 });
 
 function selectOption(option) {
-  selectedText.textContent = option;
-  dropdownMenu.classList.remove('show');
+    selectedText.textContent = option;
+    dropdownMenu.classList.remove('show');
 }
 
 // Fecha o dropdown se clicar fora dele
 document.addEventListener('click', (event) => {
-  if (!dropdownBtn.contains(event.target) && !dropdownMenu.contains(event.target)) {
-    dropdownMenu.classList.remove('show');
-  }
+    if (!dropdownBtn.contains(event.target) && !dropdownMenu.contains(event.target)) {
+        dropdownMenu.classList.remove('show');
+    }
 });
+
 
 // Função que mostra as opções de filtros na tela
 const botoes = document.querySelectorAll('.verMais');
 
 botoes.forEach(botao => {
-  const Textobotao = botao.textContent;
-  
-  botao.addEventListener('click', () => {
-    const container = botao.closest('.checkbox');
-    const labels = container.querySelectorAll('.label-grup-none');
-    
-    labels.forEach(label => {
-      label.classList.toggle('hidden');
-    });
+    const Textobotao = botao.textContent;
 
-    if (botao.textContent === Textobotao) {
-      botao.textContent = "Ver menos";
-    } else {
-      botao.textContent = Textobotao;
-    }
-  });
+    botao.addEventListener('click', () => {
+        const container = botao.closest('.checkbox, .categoria');
+        const labels = container.querySelectorAll('.label-grup-none');
+
+        labels.forEach(label => {
+            label.classList.toggle('hidden');
+        });
+
+        if (botao.textContent === Textobotao) {
+            botao.textContent = "Ver menos";
+        } else {
+            botao.textContent = Textobotao;
+        }
+    });
+});
+// Elementos do modal
+const modal = document.getElementById('atendimentoModal');
+const openModal = document.getElementById('openModal');
+const closeBtn = document.getElementById('closeBtn');
+
+// Abre o modal ao clicar no botão
+openModal.addEventListener('click', () => {
+    modal.classList.add('ativo');
 });
 
-    // Elementos do modal
-    const modal = document.getElementById('atendimentoModal');
-    const openModal = document.getElementById('openModal');
-    const closeBtn = document.getElementById('closeBtn');
+// Fecha o modal ao clicar no "X"
+closeBtn.addEventListener('click', () => {
+    modal.classList.remove('ativo');
+});
 
-    // Abre o modal ao clicar no botão
-    openModal.addEventListener('click', () => {
-      modal.classList.add('ativo');
-    });
-
-    // Fecha o modal ao clicar no "X"
-    closeBtn.addEventListener('click', () => {
-      modal.classList.remove('ativo');
-    });
-
-    // Fecha o modal ao clicar fora da área do conteúdo
-    window.addEventListener('click', (event) => {
-      if (event.target === modal) {
+// Fecha o modal ao clicar fora da área do conteúdo
+window.addEventListener('click', (event) => {
+    if (event.target === modal) {
         modal.classList.remove('ativo');
-      }
-    });
+    }
+});
 
-  // Menu dropdown
-  const menu = document.querySelector('.user-menu');
-  const menudropdown = document.querySelector('.dropdown-menu');
+// Menu dropdown
+const menu = document.querySelector('.user-menu');
+const menudropdown = document.querySelector('.dropdown-menu');
 
-  menu.addEventListener('click', (event) => {
+menu.addEventListener('click', (event) => {
     event.stopPropagation(); // Impede que o clique no menu propague para o window
     menudropdown.classList.toggle('active');
-  });
+});
 
-  window.addEventListener('click', (event) => {
+window.addEventListener('click', (event) => {
     if (event.target !== menu && !menudropdown.contains(event.target)) {
-      menudropdown.classList.remove('active');
+        menudropdown.classList.remove('active');
     }
-  });
+});

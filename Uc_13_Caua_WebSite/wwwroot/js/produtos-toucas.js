@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             precoDesconto: 'R$ 194,90',
             parcelamento: 'ou 4x de R$48,73 sem juros',
             descricao: 'A Touca Royal Script oferece estilo clássico com o logo da Royal bordado, perfeita para manter-se aquecido enquanto anda de skate.',
-            link: 'https://primorskateshop.com.br/acessorios/touca/touca-royal-script'
+           
         },
         {
             image: '/imagens/imagens-produtos-toucas/TOUCA-ANTIHERO/touca_antihero_stock_eagle.png',
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
             precoDesconto: 'R$ 179,90',
             parcelamento: 'ou 4x de R$44,98 sem juros',
             descricao: 'A Touca Anti Hero Stock Eagle Label apresenta o icônico logo da marca, confeccionada em material de alta qualidade para durabilidade e conforto.',
-            link: 'https://primorskateshop.com.br/acessorios/touca/touca-anti-hero-stock-eagle-label'
+           
         },
         {
             image: '/imagens/imagens-produtos-toucas/TOUCA-BONES-IRON/touca_bones_iron_sun.png',
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
             precoDesconto: 'R$ 169,90',
             parcelamento: 'ou 4x de R$42,48 sem juros',
             descricao: 'A Touca Bones Iron Sun combina estilo e funcionalidade, mantendo você aquecido nos dias frios enquanto pratica suas manobras.',
-            link: 'https://primorskateshop.com.br/acessorios/touca/touca-bones-iron-sun'
+      
         },
         {
             image: '/imagens/imagens-produtos-toucas/TOUCA-GIRL-ARCH/touca_girl_arch_beanie.png',
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             precoDesconto: 'R$ 168,90',
             parcelamento: 'ou 4x de R$42,23 sem juros',
             descricao: 'A Touca Girl Arch Beanie é perfeita para os fãs da marca, oferecendo conforto e estilo com o logo discreto da Girl Skateboards.',
-            link: 'https://primorskateshop.com.br/acessorios/touca/touca-girl-arch-beanie'
+         
         },
         {
             image: '/imagens/imagens-produtos-toucas/TOUCA-CHOCOLATE/touca_chocolate_eightballer.png',
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
             precoDesconto: 'R$ 194,90',
             parcelamento: 'ou 4x de R$48,73 sem juros',
             descricao: 'A Touca Chocolate Eightballer apresenta um design moderno com o logo da Chocolate Skateboards, ideal para complementar seu visual skatista.',
-            link: 'https://primorskateshop.com.br/acessorios/touca/touca-chocolate-eightballer'
+          
         },
         {
             image: '/imagens/imagens-produtos-toucas/TOUCA-SPITFIRE/touca_spitfire_old_e_skully.png',
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
             precoDesconto: 'R$ 179,90',
             parcelamento: 'ou 4x de R$44,98 sem juros',
             descricao: 'A Touca Spitfire Old e Skully é ideal para os dias frios, mantendo sua cabeça aquecida enquanto você anda de skate com estilo.',
-            link: 'https://primorskateshop.com.br/acessorios/touca/touca-spitfire-old-e-skully'
+  
         },
         {
             image: '/imagens/imagens-produtos-toucas/TOUCA-THUNDER/touca_thunder_script_patch.png',
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
             precoDesconto: 'R$ 179,90',
             parcelamento: 'ou 4x de R$44,98 sem juros',
             descricao: 'A Touca Thunder Script Patch Cuff oferece um ajuste confortável e o logo da Thunder Trucks, perfeita para completar seu look.',
-            link: 'https://primorskateshop.com.br/acessorios/touca/touca-thunder-script-patch-cuff'
+        
         },
         {
             image: '/imagens/imagens-produtos-toucas/TOUCA-CHOCOLATE-WORK/touca_chocolate_work_beanie.png',
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
             precoDesconto: 'R$ 152,90',
             parcelamento: 'ou 4x de R$38,23 sem juros',
             descricao: 'A Touca Chocolate Work Beanie é confeccionada em material de alta qualidade, garantindo durabilidade e estilo para o dia a dia.',
-            link: 'https://primorskateshop.com.br/acessorios/touca/touca-chocolate-work-beanie'
+       
         }
     ];
 
@@ -151,11 +151,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   
   
-  function verProduto(nome, preco, precoDesconto, imagem, parcelamento, descricao, textoAlternativo, imagemDemostracao1, imagemDemostracao2, imagemDemostracao3) {
-    const url = `verProduto.html?nome=${nome}&preco=${preco}&precoDesconto=${precoDesconto}&imagem=${imagem}&parcelamento=${parcelamento}&descricao=${descricao}&textoAlternativo=${textoAlternativo}&imagemDemostracao1=${imagemDemostracao1}&imagemDemostracao2=${imagemDemostracao2}&imagemDemostracao3=${imagemDemostracao3}`;
-    window.location.href = url;
-  }
+function verProduto(nome, preco, precoDesconto, imagem, parcelamento, descricao, textoAlternativo, imagemDemostracao1, imagemDemostracao2, imagemDemostracao3) {
+    // Corrigindo o formato da URL
+    const url = `/Home/VerProduto?nome=${encodeURIComponent(nome)}&preco=${encodeURIComponent(preco)}&precoDesconto=${encodeURIComponent(precoDesconto)}&imagem=${encodeURIComponent(imagem)}&parcelamento=${encodeURIComponent(parcelamento)}&descricao=${encodeURIComponent(descricao)}&textoAlternativo=${encodeURIComponent(textoAlternativo)}&imagemDemostracao1=${encodeURIComponent(imagemDemostracao1)}&imagemDemostracao2=${encodeURIComponent(imagemDemostracao2)}&imagemDemostracao3=${encodeURIComponent(imagemDemostracao3)}`;
 
+    window.location.href = url;
+}
 // função para abrir a opção de filtros da pagina de skate
 const dropdownBtn = document.querySelector('.dropdown-btn');
 const dropdownMenu = document.querySelector('.dropdown-menu-filter');

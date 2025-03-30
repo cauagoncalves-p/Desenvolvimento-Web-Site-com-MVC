@@ -95,7 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 precoDesconto: 'R$ 279,90',
                 parcelamento: 'ou 3x de R$93,30 sem juros',
                 descricao: 'Os fones de ouvido Skate Beats Wireless combinam qualidade de som e design robusto, ideais para ouvir sua playlist enquanto anda de skate.',
-                link: 'https://exemplo.com/skate-beats-wireless'
             },
             {
                 image: '/imagens/imagens-produtos-acessorios/BONE-SKATE/bone_skate_cap_urban.png',
@@ -143,11 +142,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
       
-      
-      function verProduto(nome, preco, precoDesconto, imagem, parcelamento, descricao, textoAlternativo, imagemDemostracao1, imagemDemostracao2, imagemDemostracao3) {
-        const url = `verProduto.html?nome=${nome}&preco=${preco}&precoDesconto=${precoDesconto}&imagem=${imagem}&parcelamento=${parcelamento}&descricao=${descricao}&textoAlternativo=${textoAlternativo}&imagemDemostracao1=${imagemDemostracao1}&imagemDemostracao2=${imagemDemostracao2}&imagemDemostracao3=${imagemDemostracao3}`;
-        window.location.href = url;
-      }
+function verProduto(nome, preco, precoDesconto, imagem, parcelamento, descricao, textoAlternativo, imagemDemostracao1, imagemDemostracao2, imagemDemostracao3) {
+    // Corrigindo o formato da URL
+    const url = `/Home/VerProduto?nome=${encodeURIComponent(nome)}&preco=${encodeURIComponent(preco)}&precoDesconto=${encodeURIComponent(precoDesconto)}&imagem=${encodeURIComponent(imagem)}&parcelamento=${encodeURIComponent(parcelamento)}&descricao=${encodeURIComponent(descricao)}&textoAlternativo=${encodeURIComponent(textoAlternativo)}&imagemDemostracao1=${encodeURIComponent(imagemDemostracao1)}&imagemDemostracao2=${encodeURIComponent(imagemDemostracao2)}&imagemDemostracao3=${encodeURIComponent(imagemDemostracao3)}`;
+
+    window.location.href = url;
+}
 
 // função para abrir a opção de filtros da pagina de skate
 const dropdownBtn = document.querySelector('.dropdown-btn');

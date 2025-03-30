@@ -140,41 +140,38 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   ];
 
-  const produtosGrid = document.querySelector('.aba-produtos');
+    const produtosGrid = document.querySelector('.aba-produtos');
 
-  produtosLoja.forEach(prod => {
-    const produtosCard = document.createElement('div');
-    produtosCard.classList.add('card-produtos');
+    produtosLoja.forEach(prod => {
+        const produtosCard = document.createElement('div');
+        produtosCard.classList.add('card-produtos');
 
+        produtosCard.innerHTML = `
+                <div class="card-imagem">
+                    <img src="${prod.image}" alt="${prod.textoAlternativo}">
+                    <div class="card-imagem-hover">
+                        <img src="${prod.imagem1}" alt="${prod.textoAlternativo}">
+                    </div>
+                </div>
+                <div class="info-produtos">
+                    <h4>${prod.classificacao}</h4>
+                    <h3>${prod.titulo.toUpperCase()}</h3>
+                    <div class="precos">
+                        <span>${prod.preco}</span>
+                        <p>${prod.precoDesconto}</p>
+                    </div>
+                    <p class="parcelamento">${prod.parcelamento}</p>
+                </div>
+              <button class="botao-cardProdutos" onclick="verProduto('${encodeURIComponent(prod.titulo)}', '${encodeURIComponent(prod.preco)}', '${encodeURIComponent(prod.precoDesconto)}', '${encodeURIComponent(prod.image)}','${encodeURIComponent(prod.parcelamento)}', '${encodeURIComponent(prod.descricao)}', '${encodeURIComponent(prod.textoAlternativo)}', '${encodeURIComponent(prod.imagemDemostracao1)}', '${encodeURIComponent(prod.imagemDemostracao2)}', '${encodeURIComponent(prod.imagemDemostracao3)}')">Ver Produto</button>
+          `;
 
-    produtosCard.innerHTML =
-      `<div class="card-imagem">
-            <img src= ${prod.image} alt="${prod.textoAlternativo}">
-          <div class="card-imagem-hover">
-            <img src= ${prod.imagem1} alt="${prod.textoAlternativo}">
-          </div>
-        </div>
-       <div class="info-produtos">
-         <h4>${prod.classificacao}</h4>
-         <h3>${prod.titulo.toUpperCase()}</h3>
-         <div class="precos">
-           <span>${prod.preco}</span>
-           <p>${prod.precoDesconto}</p>
-         </div>
-         <p class="parcelamento">${prod.parcelamento}</p>
-       </div>
-       <button class="botao-cardProdutos" onclick="verProduto('${prod.titulo}', '${prod.preco}', 
-       '${prod.precoDesconto}', '${prod.image}', '${prod.parcelamento}',
-       '${prod.descricao}', '${prod.textoAlternativo}', '${prod.imagemDemostracao1}', '${prod.imagemDemostracao2}',
-       '${prod.imagemDemostracao3}')">Ver Produto</button>`;
-
-    produtosGrid.appendChild(produtosCard);
-  });
+        produtosGrid.appendChild(produtosCard);
+    });
 });
 
 function verProduto(nome, preco, precoDesconto, imagem, parcelamento, descricao, textoAlternativo, imagemDemostracao1, imagemDemostracao2, imagemDemostracao3) {
-    // Envia para a rota MVC com os parâmetros
-    const url = `/Produtos/VerProduto?nome=${encodeURIComponent(nome)}&preco=${encodeURIComponent(preco)}&precoDesconto=${encodeURIComponent(precoDesconto)}&imagem=${encodeURIComponent(imagem)}&parcelamento=${encodeURIComponent(parcelamento)}&descricao=${encodeURIComponent(descricao)}&textoAlternativo=${textoAlternativo}&imagemDemostracao1=${encodeURIComponent(imagemDemostracao1)}&imagemDemostracao2=${encodeURIComponent(imagemDemostracao2)}&imagemDemostracao3=${encodeURIComponent(imagemDemostracao3)}`;
+    // Corrigindo o formato da URL
+    const url = `/Home/VerProduto?nome=${encodeURIComponent(nome)}&preco=${encodeURIComponent(preco)}&precoDesconto=${encodeURIComponent(precoDesconto)}&imagem=${encodeURIComponent(imagem)}&parcelamento=${encodeURIComponent(parcelamento)}&descricao=${encodeURIComponent(descricao)}&textoAlternativo=${encodeURIComponent(textoAlternativo)}&imagemDemostracao1=${encodeURIComponent(imagemDemostracao1)}&imagemDemostracao2=${encodeURIComponent(imagemDemostracao2)}&imagemDemostracao3=${encodeURIComponent(imagemDemostracao3)}`;
 
     window.location.href = url;
 }
