@@ -3,95 +3,112 @@
 @{
     ViewData["Title"] = "Index";
 }
+<link rel="stylesheet" href="~/css/tabelas.css">
 <!--Estilos das tabelas-->
 <link rel="stylesheet" href="~/css/tabelas.css">
+<h1>Tabela de Fornecedores</h1>
 
-<h1>Index</h1>
+<!--================================= P E S Q U I S A =================================-->
+<div class="search-section">
+    <form asp-action="Index" method="get">
+        <!-- Campo de busca principal -->
+        <div class="input-group">
+            <input type="text"
+                   class="form-control"
+                   name="searchString"
+                   placeholder="Digite nome, CNPJ, cidade...">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-search"></i> Pesquisar
+                </button>
+            </div>
+        </div>
+
+        <!-- Filtros adicionais (opcionais) -->
+        <div class="row">
+            <div class="col-md-3">
+                <input type="text"
+                       class="form-control"
+                       name="nome"
+                       placeholder="Filtrar por nome">
+            </div>
+            <div class="col-md-3">
+                <input type="text"
+                       class="form-control"
+                       name="cnpj"
+                       placeholder="Filtrar por CNPJ">
+            </div>
+            <div class="col-md-3">
+                <input type="text"
+                       class="form-control"
+                       name="cidade"
+                       placeholder="Filtrar por cidade">
+            </div>
+            <div class="col-md-3">
+                <input type="text"
+                       class="form-control"
+                       name="uf"
+                       placeholder="Filtrar por UF">
+            </div>
+        </div>
+    </form>
+</div>
+<!--================================= P E S Q U I S A =================================-->
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="create-btn">Criar novo registro</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FornecedorId)
-            </th> 
-            <th>
-                @Html.DisplayNameFor(model => model.NomeFornecedor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Celular)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CNPJ)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EnderecoCompleto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CEP)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cidade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UF)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pais)
-            </th>
-            <th></th>
+            <th>@Html.DisplayNameFor(model => model.FornecedorId)</th>
+            <th>@Html.DisplayNameFor(model => model.NomeFornecedor)</th>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+            <th>@Html.DisplayNameFor(model => model.Celular)</th>
+            <th>@Html.DisplayNameFor(model => model.CNPJ)</th>
+            <th>@Html.DisplayNameFor(model => model.EnderecoCompleto)</th>
+            <th>@Html.DisplayNameFor(model => model.CEP)</th>
+            <th>@Html.DisplayNameFor(model => model.Cidade)</th>
+            <th>@Html.DisplayNameFor(model => model.Estado)</th>
+            <th>@Html.DisplayNameFor(model => model.UF)</th>
+            <th>@Html.DisplayNameFor(model => model.Pais)</th>
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FornecedorId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomeFornecedor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Celular)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CNPJ)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EnderecoCompleto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CEP)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cidade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UF)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pais)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.FornecedorId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.FornecedorId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.FornecedorId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.FornecedorId)</td>
+                <td>@Html.DisplayFor(modelItem => item.NomeFornecedor)</td>
+                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                <td>@Html.DisplayFor(modelItem => item.Celular)</td>
+                <td>@Html.DisplayFor(modelItem => item.CNPJ)</td>
+                <td>@Html.DisplayFor(modelItem => item.EnderecoCompleto)</td>
+                <td>@Html.DisplayFor(modelItem => item.CEP)</td>
+                <td>@Html.DisplayFor(modelItem => item.Cidade)</td>
+                <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+                <td>@Html.DisplayFor(modelItem => item.UF)</td>
+                <td>@Html.DisplayFor(modelItem => item.Pais)</td>
+                <td class="action-links">
+                    <a asp-action="Edit" asp-route-id="@item.FornecedorId">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.FornecedorId">Detalhes</a>
+                    <a asp-action="Delete" asp-route-id="@item.FornecedorId">Deletar</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Máscara para CNPJ
+            $('input[name="cnpj"]').inputmask('99.999.999/9999-99');
+            // Máscara para UF
+            $('input[name="uf"]').inputmask('AA');
+        });
+    </script>
+}

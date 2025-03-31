@@ -195,5 +195,58 @@ namespace Uc_13_Caua_WebSite.Controllers
         {
             return _context.Fornecedor.Any(e => e.FornecedorId == id);
         }
+
+        /*========PESQUISA=========*/
+        [HttpGet]
+        public async Task<IActionResult> Index(
+       string searchString,  // Pesquisa geral
+       string nome,          // Filtro por nome
+       string cnpj,          // Filtro por CNPJ
+       string cidade,        // Filtro por cidade
+       string uf)            // Filtro por UF
+        {
+            IQueryable<Fornecedor> query = _context.Fornecedor;
+
+            // Pesquisa geral
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(f =>
+                    f.NomeFornecedor.Contains(searchString) ||
+                    f.CNPJ.Contains(searchString) ||
+                    f.Cidade.Contains(searchString) ||
+                    f.Email.Contains(searchString));
+            }
+
+            // Filtro por nome
+            if (!string.IsNullOrEmpty(nome))
+            {
+                query = query.Where(f => f.NomeFornecedor.Contains(nome));
+            }
+
+            // Filtro por CNPJ (com ou sem formatação)
+            if (!string.IsNullOrEmpty(cnpj))
+            {
+                string cnpjNumeros = new string(cnpj.Where(char.IsDigit).ToArray());
+                query = query.Where(f =>
+                    f.CNPJ.Replace(".", "").Replace("/", "").Replace("-", "")
+                        .Contains(cnpjNumeros));
+            }
+
+            // Filtro por cidade
+            if (!string.IsNullOrEmpty(cidade))
+            {
+                query = query.Where(f => f.Cidade.Contains(cidade));
+            }
+
+            // Filtro por UF
+            if (!string.IsNullOrEmpty(uf))
+            {
+                query = query.Where(f => f.UF == uf);
+            }
+
+            return View(await query.ToListAsync());
+        }
+        /*========PESQUISA=========*/
+
     }
 }

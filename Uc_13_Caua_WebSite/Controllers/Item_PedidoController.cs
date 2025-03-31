@@ -188,5 +188,55 @@ namespace Uc_13_Caua_WebSite.Controllers
         {
             return _context.Item_Pedido.Any(e => e.ItemPedidoId == id);
         }
+
+        /*===========PESQUISAR============*/
+        [HttpGet]
+        public async Task<IActionResult> Index(
+    string searchString,      // Pesquisa geral
+    int? pedidoId,           // Filtro por ID do pedido
+    int? produtoId,          // Filtro por ID do produto
+    string status,           // Filtro por status
+    DateTime? dataAdicao)    // Filtro por data de adição
+        {
+            IQueryable<Item_Pedido> query = _context.Item_Pedido
+                .Include(i => i.Pedido)
+                .Include(i => i.Produto);
+
+            // Pesquisa geral
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(i =>
+                    i.Produto.ProdutoNome.Contains(searchString) ||
+                    i.Status.Contains(searchString) ||
+                    i.Observacoes.Contains(searchString));
+            }
+
+            // Filtro por pedido
+            if (pedidoId.HasValue)
+            {
+                query = query.Where(i => i.PedidoId == pedidoId.Value);
+            }
+
+            // Filtro por produto
+            if (produtoId.HasValue)
+            {
+                query = query.Where(i => i.ProdutoId == produtoId.Value);
+            }
+
+            // Filtro por status
+            if (!string.IsNullOrEmpty(status))
+            {
+                query = query.Where(i => i.Status == status);
+            }
+
+            // Filtro por data de adição
+            if (dataAdicao.HasValue)
+            {
+                query = query.Where(i => i.DataAdicao.Date == dataAdicao.Value.Date);
+            }
+
+            return View(await query.ToListAsync());
+            /*========PESQUISAR=========*/
+        }
     }
 }

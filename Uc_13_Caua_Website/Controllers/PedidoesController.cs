@@ -200,5 +200,55 @@ namespace Uc_13_Caua_WebSite.Controllers
         {
             return _context.Pedido.Any(e => e.PedidoId == id);
         }
+
+
+        /*======PESQUISAR=======*/
+        [HttpGet]
+        public async Task<IActionResult> Index(
+    string searchString,      // Pesquisa geral
+    int? clienteId,          // Filtro por ID do cliente
+    int? produtoId,          // Filtro por ID do produto
+    int? quantidadeMinima,   // Filtro por quantidade mínima
+    DateTime? dataPedido)    // Filtro por data do pedido
+        {
+            IQueryable<Pedido> query = _context.Pedido
+                .Include(p => p.Cliente)
+                .Include(p => p.Produto);
+
+            // Pesquisa geral
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(p =>
+                    p.Cliente.Nome.Contains(searchString) ||
+                    p.Produto.ProdutoNome.Contains(searchString));
+            }
+
+            // Filtro por cliente
+            if (clienteId.HasValue)
+            {
+                query = query.Where(p => p.ClienteId == clienteId.Value);
+            }
+
+            // Filtro por produto
+            if (produtoId.HasValue)
+            {
+                query = query.Where(p => p.ProdutoId == produtoId.Value);
+            }
+
+            // Filtro por quantidade mínima
+            if (quantidadeMinima.HasValue)
+            {
+                query = query.Where(p => p.Quantidade >= quantidadeMinima.Value);
+            }
+
+            // Filtro por data do pedido
+            if (dataPedido.HasValue)
+            {
+                query = query.Where(p => p.DataPedido.Date == dataPedido.Value.Date);
+            }
+
+            return View(await query.ToListAsync());
+        }
+        /*======PESQUISAR=======*/
     }
 }

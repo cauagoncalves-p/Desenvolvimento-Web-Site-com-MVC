@@ -1,92 +1,126 @@
 ﻿@model IEnumerable<Uc_13_Caua_WebSite.Models.Item_Pedido>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Itens de Pedido";
 }
 
 <!--Estilos das tabelas-->
 <link rel="stylesheet" href="~/css/tabelas.css">
+<h1>Itens de Pedido</h1>
 
-<h1>Registro de itens</h1>
+<!--================================= P E S Q U I S A =================================-->
+<div class="search-section">
+    <form asp-action="Index" method="get">
+        <!-- Campo de busca principal -->
+        <div class="input-group">
+            <input type="text"
+                   class="form-control"
+                   name="searchString"
+                   placeholder="Digite produto, status...">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-search"></i> Pesquisar
+                </button>
+            </div>
+        </div>
+
+        <!-- Filtros adicionais (opcionais) -->
+        <div class="row">
+            <div class="col-md-3">
+                <input type="number"
+                       class="form-control"
+                       name="pedidoId"
+                       placeholder="ID Pedido">
+            </div>
+            <div class="col-md-3">
+                <input type="number"
+                       class="form-control"
+                       name="produtoId"
+                       placeholder="ID Produto">
+            </div>
+            <div class="col-md-3">
+                <select class="form-control" name="status">
+                    <option value="">Todos status</option>
+                    <option value="Pendente">Pendente</option>
+                    <option value="Processando">Processando</option>
+                    <option value="Entregue">Entregue</option>
+                    <option value="Cancelado">Cancelado</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <input type="date"
+                       class="form-control"
+                       name="dataAdicao"
+                       placeholder="Data de adição">
+            </div>
+        </div>
+    </form>
+</div>
+<!--================================= P E S Q U I S A =================================-->
 
 <p>
-    <a asp-action="Create">Adiconar novo registro</a>
+    <a asp-action="Create" class="create-btn">Adicionar Item</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ItemPedidoId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pedido)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Produto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantidade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrecoUnitario)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Desconto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrecoTotal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataAdicao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Observacoes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th></th>
+            <th>@Html.DisplayNameFor(model => model.ItemPedidoId)</th>
+            <th>@Html.DisplayNameFor(model => model.PedidoId)</th>
+            <th>@Html.DisplayNameFor(model => model.Produto)</th>
+            <th>@Html.DisplayNameFor(model => model.Quantidade)</th>
+            <th>@Html.DisplayNameFor(model => model.PrecoUnitario)</th>
+            <th>@Html.DisplayNameFor(model => model.Desconto)</th>
+            <th>@Html.DisplayNameFor(model => model.PrecoTotal)</th>
+            <th>@Html.DisplayNameFor(model => model.Status)</th>
+            <th>@Html.DisplayNameFor(model => model.DataAdicao)</th>
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-           <td>
-              @Html.DisplayFor(modelItem => item.ItemPedidoId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pedido.PedidoId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Produto.ProdutoNome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantidade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrecoUnitario)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Desconto)
-            </td> 
-            <td>
-                @Html.DisplayFor(modelItem => item.PrecoTotal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataAdicao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Observacoes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ItemPedidoId">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.ItemPedidoId">Detalhes</a> |
-                <a asp-action="Delete" asp-route-id="@item.ItemPedidoId">Deletar</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.ItemPedidoId)</td>
+                <td>@Html.DisplayFor(modelItem => item.PedidoId)</td>
+                <td>@Html.DisplayFor(modelItem => item.Produto.ProdutoNome)</td>
+                <td>@Html.DisplayFor(modelItem => item.Quantidade)</td>
+                <td>@Html.DisplayFor(modelItem => item.PrecoUnitario)</td>
+                <td>@Html.DisplayFor(modelItem => item.Desconto)</td>
+                <td>@Html.DisplayFor(modelItem => item.PrecoTotal)</td>
+                <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                <td>@Html.DisplayFor(modelItem => item.DataAdicao)</td>
+                <td class="action-links">
+                    <a asp-action="Edit" asp-route-id="@item.ItemPedidoId">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.ItemPedidoId">Detalhes</a>
+                    <a asp-action="Delete" asp-route-id="@item.ItemPedidoId">Remover</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Seleciona o status atual no dropdown
+            const urlParams = new URLSearchParams(window.location.search);
+            const statusParam = urlParams.get('status');
+            if (statusParam) {
+                $('select[name="status"]').val(statusParam);
+            }
+
+            // Máscara para valores monetários (opcional)
+            $('input[name="precoUnitario"]').inputmask('decimal', {
+                'alias': 'numeric',
+                'groupSeparator': ',',
+                'autoGroup': true,
+                'digits': 2,
+                'digitsOptional': false,
+                'placeholder': '0',
+                'prefix': 'R$ ',
+                'rightAlign': false
+            });
+        });
+    </script>
+}

@@ -3,59 +3,108 @@
 @{
     ViewData["Title"] = "Index";
 }
+
 <!--Estilos das tabelas-->
 <link rel="stylesheet" href="~/css/tabelas.css">
+<h1>Tabela de Pedidos</h1>
 
-<h1>Index</h1>
+<!--================================= P E S Q U I S A =================================-->
+<div class="search-section">
+    <form asp-action="Index" method="get">
+        <!-- Campo de busca principal -->
+        <div class="input-group">
+            <input type="text"
+                   class="form-control"
+                   name="searchString"
+                   placeholder="Digite cliente, produto...">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-search"></i> Pesquisar
+                </button>
+            </div>
+        </div>
+
+        <!-- Filtros adicionais (opcionais) -->
+        <div class="row">
+            <div class="col-md-3">
+                <input type="number"
+                       class="form-control"
+                       name="clienteId"
+                       placeholder="ID Cliente">
+            </div>
+            <div class="col-md-3">
+                <input type="number"
+                       class="form-control"
+                       name="produtoId"
+                       placeholder="ID Produto">
+            </div>
+            <div class="col-md-3">
+                <input type="number"
+                       class="form-control"
+                       name="quantidadeMinima"
+                       placeholder="Qtd. mínima">
+            </div>
+            <div class="col-md-3">
+                <input type="date"
+                       class="form-control"
+                       name="dataPedido"
+                       placeholder="Data do pedido">
+            </div>
+        </div>
+    </form>
+</div>
+<!--================================= P E S Q U I S A =================================-->
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="create-btn">Criar novo registro</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantidade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Preco)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataPedido)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cliente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Produto)
-            </th>
-            <th></th>
+            <th>@Html.DisplayNameFor(model => model.PedidoId)</th>
+            <th>@Html.DisplayNameFor(model => model.Cliente)</th>
+            <th>@Html.DisplayNameFor(model => model.Produto)</th>
+            <th>@Html.DisplayNameFor(model => model.Quantidade)</th>
+            <th>@Html.DisplayNameFor(model => model.Preco)</th>
+            <th>@Html.DisplayNameFor(model => model.DataPedido)</th>
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantidade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Preco)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataPedido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cliente.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Produto.ProdutoNome)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PedidoId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PedidoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PedidoId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.PedidoId)</td>
+                <td>@Html.DisplayFor(modelItem => item.Cliente.Nome)</td>
+                <td>@Html.DisplayFor(modelItem => item.Produto.ProdutoNome)</td>
+                <td>@Html.DisplayFor(modelItem => item.Quantidade)</td>
+                <td>@Html.DisplayFor(modelItem => item.Preco)</td>
+                <td>@Html.DisplayFor(modelItem => item.DataPedido)</td>
+                <td class="action-links">
+                    <a asp-action="Edit" asp-route-id="@item.PedidoId">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.PedidoId">Detalhes</a>
+                    <a asp-action="Delete" asp-route-id="@item.PedidoId">Deletar</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Máscara para valores monetários (opcional)
+            $('input[name="preco"]').inputmask('decimal', {
+                'alias': 'numeric',
+                'groupSeparator': ',',
+                'autoGroup': true,
+                'digits': 2,
+                'digitsOptional': false,
+                'placeholder': '0',
+                'prefix': 'R$ ',
+                'rightAlign': false
+            });
+        });
+    </script>
+}

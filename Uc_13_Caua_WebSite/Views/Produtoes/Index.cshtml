@@ -6,69 +6,110 @@
 
 <!--Estilos das tabelas-->
 <link rel="stylesheet" href="~/css/tabelas.css">
+<h1>Tabela de Produtos</h1>
 
-<h1>Index</h1>
+<!--================================= P E S Q U I S A =================================-->
+<div class="search-section">
+    <form asp-action="Index" method="get">
+        <!-- Campo de busca principal -->
+        <div class="input-group">
+            <input type="text"
+                   class="form-control"
+                   name="searchString"
+                   placeholder="Digite nome, tipo, fornecedor...">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-search"></i> Pesquisar
+                </button>
+            </div>
+        </div>
+
+        <!-- Filtros adicionais (opcionais) -->
+        <div class="row">
+            <div class="col-md-3">
+                <input type="text"
+                       class="form-control"
+                       name="nomeProduto"
+                       placeholder="Filtrar por nome">
+            </div>
+            <div class="col-md-3">
+                <input type="text"
+                       class="form-control"
+                       name="tipoProduto"
+                       placeholder="Filtrar por tipo">
+            </div>
+            <div class="col-md-3">
+                <input type="number"
+                       class="form-control"
+                       name="precoMinimo"
+                       placeholder="Preço mínimo"
+                       step="0.01">
+            </div>
+            <div class="col-md-3">
+                <input type="number"
+                       class="form-control"
+                       name="fornecedorId"
+                       placeholder="ID Fornecedor">
+            </div>
+        </div>
+    </form>
+</div>
+<!--================================= P E S Q U I S A =================================-->
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="create-btn">Criar novo registro</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProdutoNome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tipo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrecoUnitario)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantidade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrecoTotal)
-            </th> 
-            <th>
-                @Html.DisplayNameFor(model => model.DataCadastro)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.fornecedor)
-            </th>
-            <th></th>
+            <th>@Html.DisplayNameFor(model => model.ProdutoId)</th>
+            <th>@Html.DisplayNameFor(model => model.ProdutoNome)</th>
+            <th>@Html.DisplayNameFor(model => model.Tipo)</th>
+            <th>@Html.DisplayNameFor(model => model.PrecoUnitario)</th>
+            <th>@Html.DisplayNameFor(model => model.Quantidade)</th>
+            <th>@Html.DisplayNameFor(model => model.PrecoTotal)</th>
+            <th>@Html.DisplayNameFor(model => model.DataCadastro)</th>
+            <th>@Html.DisplayNameFor(model => model.FornecedorId)</th>
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProdutoNome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tipo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrecoUnitario)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantidade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrecoTotal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataCadastro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.fornecedor.FornecedorId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ProdutoId">Edit</a> 
-                <a asp-action="Details" asp-route-id="@item.ProdutoId">Details</a> 
-                <a asp-action="Delete" asp-route-id="@item.ProdutoId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.ProdutoId)</td>
+                <td>@Html.DisplayFor(modelItem => item.ProdutoNome)</td>
+                <td>@Html.DisplayFor(modelItem => item.Tipo)</td>
+                <td>@Html.DisplayFor(modelItem => item.PrecoUnitario)</td>
+                <td>@Html.DisplayFor(modelItem => item.Quantidade)</td>
+                <td>@Html.DisplayFor(modelItem => item.PrecoTotal)</td>
+                <td>@Html.DisplayFor(modelItem => item.DataCadastro)</td>
+                <td>@Html.DisplayFor(modelItem => item.FornecedorId)</td>
+                <td class="action-links">
+                    <a asp-action="Edit" asp-route-id="@item.ProdutoId">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.ProdutoId">Detalhes</a>
+                    <a asp-action="Delete" asp-route-id="@item.ProdutoId">Deletar</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Máscara para valores monetários (opcional)
+            $('input[name="precoMinimo"]').inputmask('decimal', {
+                'alias': 'numeric',
+                'groupSeparator': ',',
+                'autoGroup': true,
+                'digits': 2,
+                'digitsOptional': false,
+                'placeholder': '0',
+                'prefix': 'R$ ',
+                'rightAlign': false
+            });
+        });
+    </script>
+}

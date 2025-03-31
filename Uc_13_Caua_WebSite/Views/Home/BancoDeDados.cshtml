@@ -1,6 +1,214 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skate Tech</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --text-color: #ecf0f1;
+            --glow-color: rgba(52, 152, 219, 0.7);
+            --neon-pink: #ff2d75;
+            --neon-blue: #00f3ff;
+        }
 
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: var(--text-color);
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--neon-blue), var(--text-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+            .header-title i {
+                font-size: 1.5rem;
+            }
+
+        .nav-links {
+            display: flex;
+            gap: 1.8rem;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+            .nav-link::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+                transition: 0.5s;
+            }
+
+            .nav-link:hover {
+                background: rgba(255, 255, 255, 0.1);
+                transform: translateY(-5px) scale(1.05);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+                color: var(--neon-blue);
+            }
+
+                .nav-link:hover::before {
+                    left: 100%;
+                }
+
+                .nav-link:hover i {
+                    color: var(--neon-pink);
+                    transform: rotate(15deg);
+                }
+
+            .nav-link i {
+                font-size: 1.3rem;
+                transition: all 0.3s ease;
+            }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .main-title {
+            font-size: 6rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--neon-blue), var(--neon-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px var(--glow-color);
+            animation: pulse 1.5s infinite, glow 2s ease-in-out infinite alternate;
+            letter-spacing: 5px;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+            .main-title::after {
+                content: '';
+                position: absolute;
+                left: 50%;
+                bottom: -15px;
+                transform: translateX(-50%);
+                width: 50%;
+                height: 4px;
+                background: linear-gradient(to right, var(--neon-blue), var(--neon-pink));
+                box-shadow: 0 0 15px var(--neon-blue), 0 0 25px var(--neon-pink);
+                border-radius: 50%;
+            }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <div class="header-title">
+                <i class="fas fa-database"></i>
+                <span>Banco de Dados</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-users"></i> Clientes
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-truck"></i> Fornecedores
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-box"></i> Produtos
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-shopping-cart"></i> Pedidos
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-list-ul"></i> Itens
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1 class="main-title">SKATE TECH</h1>
+    </main>
+
+    <script>
+        // Efeito de digitação opcional para o título principal
+        document.addEventListener('DOMContentLoaded', function() {
+            const title = document.querySelector('.main-title');
+            const text = 'SKATE TECH';
+            let i = 0;
+
+            function typeWriter() {
+                if (i < text.length) {
+                    title.textContent = text.substring(0, i+1);
+                    i++;
+                    setTimeout(typeWriter, 200);
+                }
+            }
+
+            // Inicia com texto vazio e ativa o efeito
+            title.textContent = '';
+            setTimeout(typeWriter, 500);
+        });
+    </script>
+</body>
+</html>
