@@ -77,6 +77,10 @@
 
                 <!-- Contato -->
                 <li><a asp-controller="Home" asp-action="PaginaContato">Contato</a></li>
+
+                <!-- Banco de dados -->
+                <li><a asp-controller="Home" asp-action="BancoDeDados">Banco de dados</a></li>
+
             </ul>
         </nav>
     </header>
@@ -107,7 +111,7 @@
                     <p id="cart-subtotal">Subtotal: <strong>R$ 0,00</strong></p>
                 </div>
                 <div class="button-comprar">
-                    <a href="~/finalizarCompra.html"><button>Finalizar Compra</button></a>
+                    <a asp-controller="Home" asp-action="FinalizarCompra"><button>Finalizar Compra</button></a>
                     <a id="voltar">Continuar comprando</a>
                 </div>
             </div>

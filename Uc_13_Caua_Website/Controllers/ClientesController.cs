@@ -153,5 +153,56 @@ namespace Uc_13_Caua_WebSite.Controllers
         {
             return _context.Cliente.Any(e => e.ClienteId == id);
         }
+
+
+        /*==========PESQUISA===========*/
+        [HttpGet]
+        public async Task<IActionResult> Index(
+            string searchString,  // Pesquisa geral (nome, sobrenome, email, CPF, etc.)
+            string nome,          // Pesquisa específica por nome
+            string cpf,           // Pesquisa específica por CPF
+            string cidade,        // Pesquisa específica por cidade
+            string estado)        // Pesquisa específica por estado
+        {
+            IQueryable<Cliente> query = _context.Cliente;
+
+            // Pesquisa geral (case-insensitive)
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(c =>
+                    EF.Functions.Like(c.Nome, $"%{searchString}%") ||
+                    EF.Functions.Like(c.Sobrenome, $"%{searchString}%") ||
+                    EF.Functions.Like(c.Email, $"%{searchString}%") ||
+                    EF.Functions.Like(c.CPF, $"%{searchString}%") ||
+                    EF.Functions.Like(c.Cidade, $"%{searchString}%") ||
+                    EF.Functions.Like(c.Estado, $"%{searchString}%"));
+            }
+
+            // Filtros específicos (também case-insensitive)
+            if (!string.IsNullOrEmpty(nome))
+            {
+                query = query.Where(c => EF.Functions.Like(c.Nome, $"%{nome}%"));
+            }
+
+            if (!string.IsNullOrEmpty(cpf))
+            {
+                query = query.Where(c => EF.Functions.Like(c.CPF, $"%{cpf}%"));
+            }
+
+            if (!string.IsNullOrEmpty(cidade))
+            {
+                query = query.Where(c => EF.Functions.Like(c.Cidade, $"%{cidade}%"));
+            }
+
+            if (!string.IsNullOrEmpty(estado))
+            {
+                query = query.Where(c =>
+                    EF.Functions.Like(c.Estado, $"%{estado}%") ||
+                    EF.Functions.Like(c.UF, $"%{estado}%"));
+            }
+
+            return View(await query.ToListAsync());
+        }
+        /*==========PESQUISA===========*/
     }
 }
