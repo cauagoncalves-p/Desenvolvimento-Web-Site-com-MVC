@@ -49,7 +49,7 @@ namespace Uc_13_Caua_WebSite.Controllers
         // GET: Pedidoes/Create
         public IActionResult Create()
         {
-            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "CEP");
+            ViewData["ClienteId"] = new SelectList(_context.Cliente, "ClienteId", "Nome");
             ViewData["ProdutoId"] = new SelectList(_context.Produto, "ProdutoId", "ProdutoNome");
             return View();
         }

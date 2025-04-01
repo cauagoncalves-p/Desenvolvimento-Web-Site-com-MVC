@@ -57,12 +57,13 @@ namespace Uc_13_Caua_WebSite.Controllers
         {
             ViewBag.TiposProduto = new SelectList(new List<string>
             {
-                "Eletrônico",
-                "Alimento",
-                "Vestuário",
-                "Limpeza",
-                "Cosmético",
-                "Brinquedo"
+                "Shape",
+                "Rodas",
+                "Trucks",
+                "Rolamentos",
+                "Lixas",
+                "Parafusos/Hardware",
+                "Amortecedores"
             });
         }
 

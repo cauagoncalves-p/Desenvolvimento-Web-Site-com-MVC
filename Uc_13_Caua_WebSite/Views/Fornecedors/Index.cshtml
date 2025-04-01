@@ -3,10 +3,35 @@
 @{
     ViewData["Title"] = "Index";
 }
-<link rel="stylesheet" href="~/css/tabelas.css">
+
 <!--Estilos das tabelas-->
 <link rel="stylesheet" href="~/css/tabelas.css">
 <h1>Tabela de Fornecedores</h1>
+<header>
+    <div class="nav-container">
+        <a asp-action="Index" asp-controller="Home" class="header-title">
+            <i class="fas fa-database"></i>
+            <span>Skate Tech</span>
+        </a>
+        <nav class="nav-links">
+            <a asp-controller="Clientes" asp-action="Index" class="nav-link">
+                <i class="fas fa-users"></i> Clientes
+            </a>
+            <a asp-controller="Fornecedors" asp-action="Index" class="nav-link">
+                <i class="fas fa-truck"></i> Fornecedores
+            </a>
+            <a asp-controller="Produtoes" asp-action="Index" class="nav-link">
+                <i class="fas fa-box"></i> Produtos
+            </a>
+            <a asp-controller="Pedidoes" asp-action="Index" class="nav-link">
+                <i class="fas fa-shopping-cart"></i> Pedidos
+            </a>
+            <a asp-controller="Item_Pedido" asp-action="Index" class="nav-link">
+                <i class="fas fa-list-ul"></i> Itens Pedido
+            </a>
+        </nav>
+    </div>
+</header>
 
 <!--================================= P E S Q U I S A =================================-->
 <div class="search-section">
