@@ -1,9 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = null; // Isso desabilita o uso de qualquer _Layout
+    ViewData["Title"] = "Skate Tech - Página Inicial";
+}
+
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skate Tech</title>
+    <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -14,6 +19,7 @@
             --glow-color: rgba(52, 152, 219, 0.7);
             --neon-pink: #ff2d75;
             --neon-blue: #00f3ff;
+            --bg-dark: #121212;
         }
 
         * {
@@ -24,9 +30,8 @@
         }
 
         body {
-            background-color: #121212;
+            background-color: var(--bg-dark);
             color: var(--text-color);
-            overflow-x: hidden;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -36,8 +41,6 @@
             background: linear-gradient(135deg, #1a1a2e, #16213e);
             padding: 1rem 2rem;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-            position: relative;
-            z-index: 100;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
@@ -60,6 +63,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            text-decoration: none;
         }
 
             .header-title i {
@@ -68,57 +72,37 @@
 
         .nav-links {
             display: flex;
-            gap: 1.8rem;
+            gap: 1rem;
         }
 
         .nav-link {
             color: var(--text-color);
             text-decoration: none;
             font-weight: 600;
-            font-size: 1.1rem;
-            padding: 0.7rem 1.2rem;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
             border-radius: 8px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 0.7rem;
-            position: relative;
-            overflow: hidden;
+            gap: 0.5rem;
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-            .nav-link::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: -100%;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-                transition: 0.5s;
-            }
-
             .nav-link:hover {
                 background: rgba(255, 255, 255, 0.1);
-                transform: translateY(-5px) scale(1.05);
-                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+                transform: translateY(-2px);
                 color: var(--neon-blue);
             }
 
-                .nav-link:hover::before {
-                    left: 100%;
-                }
-
-                .nav-link:hover i {
-                    color: var(--neon-pink);
-                    transform: rotate(15deg);
-                }
-
             .nav-link i {
-                font-size: 1.3rem;
+                font-size: 1.1rem;
                 transition: all 0.3s ease;
+            }
+
+            .nav-link:hover i {
+                color: var(--neon-pink);
             }
 
         main {
@@ -157,30 +141,60 @@
                 border-radius: 50%;
             }
 
+        @@keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @@keyframes glow {
+            from {
+                text-shadow: 0 0 10px var(--neon-blue);
+            }
+
+            to {
+                text-shadow: 0 0 20px var(--neon-pink), 0 0 30px var(--neon-pink);
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="nav-container">
-            <div class="header-title">
+            <a asp-action="Index" asp-controller="Home" class="header-title">
                 <i class="fas fa-database"></i>
-                <span>Banco de Dados</span>
-            </div>
+                <span>Skate Tech</span>
+            </a>
             <nav class="nav-links">
-                <a href="#" class="nav-link">
+                <a asp-controller="Clientes" asp-action="Index" class="nav-link">
                     <i class="fas fa-users"></i> Clientes
                 </a>
-                <a href="#" class="nav-link">
+                <a asp-controller="Fornecedors" asp-action="Index" class="nav-link">
                     <i class="fas fa-truck"></i> Fornecedores
                 </a>
-                <a href="#" class="nav-link">
+                <a asp-controller="Produtoes" asp-action="Index" class="nav-link">
                     <i class="fas fa-box"></i> Produtos
                 </a>
-                <a href="#" class="nav-link">
+                <a asp-controller="Pedidoes" asp-action="Index" class="nav-link">
                     <i class="fas fa-shopping-cart"></i> Pedidos
                 </a>
-                <a href="#" class="nav-link">
-                    <i class="fas fa-list-ul"></i> Itens
+                <a asp-controller="Item_Pedido" asp-action="Index" class="nav-link">
+                    <i class="fas fa-list-ul"></i> Itens Pedido
                 </a>
             </nav>
         </div>
@@ -190,8 +204,12 @@
         <h1 class="main-title">SKATE TECH</h1>
     </main>
 
+    <footer>
+        &copy; @DateTime.Now.Year - Skate Tech
+    </footer>
+
     <script>
-        // Efeito de digitação opcional para o título principal
+        // Efeito de digitação para o título principal
         document.addEventListener('DOMContentLoaded', function() {
             const title = document.querySelector('.main-title');
             const text = 'SKATE TECH';

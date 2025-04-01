@@ -227,9 +227,7 @@ namespace Uc_13_Caua_WebSite.Controllers
             if (!string.IsNullOrEmpty(cnpj))
             {
                 string cnpjNumeros = new string(cnpj.Where(char.IsDigit).ToArray());
-                query = query.Where(f =>
-                    f.CNPJ.Replace(".", "").Replace("/", "").Replace("-", "")
-                        .Contains(cnpjNumeros));
+                query = query.Where(f => f.CNPJ.Replace(".", "").Replace("/", "").Replace("-", "").Contains(cnpjNumeros));
             }
 
             // Filtro por cidade
